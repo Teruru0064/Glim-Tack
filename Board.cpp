@@ -13,6 +13,7 @@ int homepallet[5];
 
 int img_pallet[5];
 
+//変更テスト
 
 
 int mapdata[MapMaxX][MapMaxY];//描画用マップ
