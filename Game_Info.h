@@ -1,0 +1,2 @@
+#define WINDOW_WIGHT 1280
+#define WINDOW_HEIGHT 720

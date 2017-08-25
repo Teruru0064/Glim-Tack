@@ -1,0 +1,3 @@
+﻿1>------ ビルド開始: プロジェクト:GameSystemSample, 構成:Debug Win32 ------
+1>  0718授業用.vcxproj -> C:\Users\simoda\Desktop\ぐりむたっく - シーン切り替え\Debug\GameSystemSample.exe
+========== ビルド: 1 正常終了、0 失敗、0 更新不要、0 スキップ ==========
