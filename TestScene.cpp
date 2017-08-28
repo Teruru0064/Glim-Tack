@@ -1571,47 +1571,6 @@ void TestScene(void){
 	RedHood_Unit_Draw();
 	SnowWhite_Unit_Draw();
 
-	////1Pのユニット表示
-	//if (colt_select_1p != 1){
-	//	DrawGraph(1104, 20, unit_1[0], true);
-	//}
-	//else{
-	//	DrawGraph(1104, 20, unit_1[1], true);
-	//}
-	//if (colt_select_1p != 2){
-	//	DrawGraph(1104, 136, unit_1[2], true);
-	//}
-	//else{
-	//	DrawGraph(1104, 136, unit_1[3], true);
-	//}
-	//if (colt_select_1p != 3){
-	//	DrawGraph(1104, 252, unit_1[4], true);
-	//}
-	//else
-	//{
-	//	DrawGraph(1104, 252, unit_1[5], true);
-	//}
-
-
-	////2Pのユニット表示
-	//if (colt_select_2p != 11){
-	//	DrawGraph(80, 20, unit_2[0], true);
-	//}
-	//else{
-	//	DrawGraph(80, 20, unit_2[1], true);
-	//}
-	//if (colt_select_2p != 12){
-	//	DrawGraph(80, 136, unit_2[2], true);
-	//}
-	//else{
-	//	DrawGraph(80, 136, unit_2[3], true);
-	//}
-	//if (colt_select_2p != 13){
-	//	DrawGraph(80, 252, unit_2[4], true);
-	//}
-	//else{
-	//	DrawGraph(80, 252, unit_2[5], true);
-	//}
 
 	//コマの表示
 	Colt1_Draw();
