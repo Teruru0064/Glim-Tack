@@ -16,6 +16,7 @@
 #include "GameInit.h"
 #include "Game_Info.h"
 #include "Colt.h"
+#include "Unit.h"
 
 extern int game_status;
 extern int Board_X, Board_Y;
@@ -45,8 +46,11 @@ int img_pallet2[5];
 
 
 //unit1は赤ずきん用、unit2は白雪用
-int unit_1[6], unit_2[6];
+//int unit_1[6], unit_2[6];
+
+//赤ずきん(イメージロード用)
 int RedHood;
+//白雪姫(イメージロード用)
 int SnowWhite;
 
 //移動先を指定した時の到着地点のx.y座標(1はコマ①.2はコマ②.3はコマ③)
@@ -56,13 +60,10 @@ int ArrivalPoint_2p_1x, ArrivalPoint_2p_1y;
 
 //選択なう
 //1pの選択状態 1はコマ①を選択中 2はコマ②を選択中 3はコマ③を選択中
-int colt_select_1p = 1;
+int colt_select_1p;
 //２pの選択状態 11はコマ①を選択中 12はコマ②を選択中 13はコマ③を選択中
-int colt_select_2p = 0;
-//カーソルの状態1p
-int testselect2 = 0;
-//カーソルの状態2p
-int testselect3 = 0;
+int colt_select_2p;
+
 //スコア用変数
 int sumred = 0;
 int sumblue = 0;
@@ -112,7 +113,7 @@ int mapX25, mapY25;//2p兵士3の1
 int mapX26, mapY26;//2p兵士3の2
 //制限時間を作る
 int GameTime = 0;
-int GameTime_Minute=0;	//分表示用
+int GameTime_Minute = 0;	//分表示用
 
 //兵士管理用フラグ兵士を使っているか使ってないか
 int RedTimeFlag11 = 0;//兵士1の1
@@ -146,7 +147,7 @@ int White;
 
 
 extern XINPUT_STATE XInputState1, XInputState2;
-extern int P1_x , P1_y, P2_x , P2_y ;
+extern int P1_x, P1_y, P2_x, P2_y;
 extern int menu_flg;
 
 
@@ -161,8 +162,8 @@ void Test_init(void){
 
 	//画像の読み込み
 	LoadDivGraph("map_img/pallet2.png", 64, 5, 1, 64, 64, img_pallet2);		//移動可能地点の光
-	LoadDivGraph("colt_img/LittleRedRidingHood_Unit.png", 96, 2, 3, 96, 96, unit_1);
-	LoadDivGraph("colt_img/SnowWhite_Unit.png", 96, 2, 3, 96, 96, unit_2);
+	/*LoadDivGraph("colt_img/LittleRedRidingHood_Unit.png", 96, 2, 3, 96, 96, unit_1);
+	LoadDivGraph("colt_img/SnowWhite_Unit.png", 96, 2, 3, 96, 96, unit_2);*/
 	RedHood = LoadGraph("char_img/LittleRedRidingHood.png");
 	SnowWhite = LoadGraph("char_img/SnowWhite.png");
 	img_BG = LoadGraph("bg_img/BG.png");
@@ -183,8 +184,6 @@ void Test_init(void){
 	//ゲームが始まったときにコマ1を選択した状態
 	colt_select_1p = 1;
 	colt_select_2p = 11;
-	testselect2 = 0;
-	testselect3 = 0;
 
 	sumred = 0;
 	sumblue = 0;
@@ -220,8 +219,8 @@ void Test_init(void){
 //兵士管理(赤　1-1)
 void RedFlag11(int mapX, int mapY){
 	if (RedTimeFlag11 == 0){
-			mapdata[mapX11][mapY11] = 1;
-			RedTimeFlag11 = -1;
+		mapdata[mapX11][mapY11] = 1;
+		RedTimeFlag11 = -1;
 	}
 }
 //兵士管理(赤　1-2)
@@ -287,7 +286,7 @@ void BlueFlag15(int mapX, int mapY){
 		mapdata[mapX25 - 1][mapY25 + 1] = 2;//左下
 		mapdata[mapX25][mapY25 + 1] = 2;//下
 		mapdata[mapX25][mapY25 - 1] = 2;//上
-		
+
 	}
 }
 //スコア関数
@@ -386,8 +385,8 @@ void TestFirstBlue2(int mapX, int mapY){
 void TestFirstRed(int mapX, int mapY){
 
 	for (int i = 0; i < 3; i++){
-		if (colt1[i].mapx == mapX && colt1[i].mapy == mapY ){
-		//if (colt1[i].mapx == now_mapx && colt1[i].mapy == now_mapy && colt1[i].active==1){
+		if (colt1[i].mapx == mapX && colt1[i].mapy == mapY){
+			//if (colt1[i].mapx == now_mapx && colt1[i].mapy == now_mapy && colt1[i].active==1){
 			colt1[i].move = 1;
 		}
 
@@ -475,11 +474,11 @@ void TestFirstRed(int mapX, int mapY){
 	//右
 	if ((checkMapX2 < MapMaxX) && (checkMapY != -1)){
 		//ファイル参照内だったら無条件で表示させる　　　
-		if (mapdata[checkMapX2][mapY - 1] != 100) 
+		if (mapdata[checkMapX2][mapY - 1] != 100)
 			mapdata2[checkMapX2][mapY - 1] = 1;
 	}
 	if ((checkMapX2 < MapMaxX) && (checkMapY2 != (MapMaxY + 2))){
-		if (mapdata[checkMapX2][mapY + 1] != 100) 
+		if (mapdata[checkMapX2][mapY + 1] != 100)
 			mapdata2[checkMapX2][mapY + 1] = 1;
 	}
 }
@@ -603,7 +602,7 @@ void TestSecondRed(int mapX, int mapY){
 		mapdata[mapX][mapY] = 1;
 	}
 	//左1マス右3マス以下
-	if ((mapdata[mapX -1][mapY] == 1) && (mapdata[mapX + 3][mapY] == 1)){
+	if ((mapdata[mapX - 1][mapY] == 1) && (mapdata[mapX + 3][mapY] == 1)){
 		mapdata[mapX][mapY] = 1;
 		mapdata[mapX + 1][mapY] = 1;
 		mapdata[mapX + 2][mapY] = 1;
@@ -1544,7 +1543,7 @@ void TestScene(void){
 			break;
 		}
 	}
-	
+
 	//塗る確定時（青 3-1）
 	for (int i = 0; i < MapMaxX; i++){
 		for (int j = 0; j < MapMaxY; j++){
@@ -1557,62 +1556,67 @@ void TestScene(void){
 		}
 	}
 
-	//1Pのユニット表示
-	if ((testselect2 != 1) && (colt_select_1p != 1)){
-		DrawGraph(1104, 20, unit_1[0], true);
-		//Colt_Draw();
-	}
-	else{
-		DrawGraph(1104, 20, unit_1[1], true);
-	}
-	if ((testselect2 != 2) && (colt_select_1p != 2)){
-		DrawGraph(1104, 136, unit_1[2], true);
-	}
-	else{
-		DrawGraph(1104, 136, unit_1[3], true);
-	}
-	if ((testselect2 != 3) && (colt_select_1p != 3)){
-		DrawGraph(1104, 252, unit_1[4], true);
-	}
-	else
-	{
-		DrawGraph(1104, 252, unit_1[5], true);
-	}
+	//ユニット表示
+	RedHood_Unit_Draw();
+	SnowWhite_Unit_Draw();
+
+	////1Pのユニット表示
+	//if (colt_select_1p != 1){
+	//	DrawGraph(1104, 20, unit_1[0], true);
+	//}
+	//else{
+	//	DrawGraph(1104, 20, unit_1[1], true);
+	//}
+	//if (colt_select_1p != 2){
+	//	DrawGraph(1104, 136, unit_1[2], true);
+	//}
+	//else{
+	//	DrawGraph(1104, 136, unit_1[3], true);
+	//}
+	//if (colt_select_1p != 3){
+	//	DrawGraph(1104, 252, unit_1[4], true);
+	//}
+	//else
+	//{
+	//	DrawGraph(1104, 252, unit_1[5], true);
+	//}
 
 
-	//2Pのユニット表示
-	if ((testselect2 != 6) && (colt_select_2p != 11)){
-		DrawGraph(80, 20, unit_2[0], true);
-	}
-	else{
-		DrawGraph(80, 20, unit_2[1], true);
-	}
-	if ((testselect2 != 7) && (colt_select_2p != 12)){
-		DrawGraph(80, 136, unit_2[2], true);
-	}
-	else{
-		DrawGraph(80, 136, unit_2[3], true);
-	}
-	if ((testselect2 != 8) && (colt_select_2p != 13)){
-		DrawGraph(80, 252, unit_2[4], true);
-	}
-	else{
-		DrawGraph(80, 252, unit_2[5], true);
-	}
+	////2Pのユニット表示
+	//if (colt_select_2p != 11){
+	//	DrawGraph(80, 20, unit_2[0], true);
+	//}
+	//else{
+	//	DrawGraph(80, 20, unit_2[1], true);
+	//}
+	//if (colt_select_2p != 12){
+	//	DrawGraph(80, 136, unit_2[2], true);
+	//}
+	//else{
+	//	DrawGraph(80, 136, unit_2[3], true);
+	//}
+	//if (colt_select_2p != 13){
+	//	DrawGraph(80, 252, unit_2[4], true);
+	//}
+	//else{
+	//	DrawGraph(80, 252, unit_2[5], true);
+	//}
 
-	//colt表示
+	//コマの表示
 	Colt1_Draw();
+	//Colt2_Draw();
+	//Colt3_Draw();
 
 
-	DrawFormatString(545, 50, White, "のこり %d:%02d", GameTime_Minute,GameTime / 60); //文字列表示
+	DrawFormatString(545, 50, White, "のこり %d:%02d", GameTime_Minute, GameTime / 60); //文字列表示
 	//スコア表示
 	DrawFormatString(920, 55, White, "%d", sumred);
 	DrawFormatString(340, 55, White, "%d", sumblue);
-	
+
 
 	//DrawFormatString(0, 0, White, "select %d", colt_select_1p);
 	//DrawFormatString(0, 30, White, "select2 %d",colt_select_2p);
-	
+
 	//DrawFormatString(0, 150,White,"mx:%dmy%d",moveto_x,moveto_y); //文字列表示
 	//DrawFormatString(0, 200, White, "mx:%dmy%d", moveto_x2, moveto_y2); //文字列表示
 	//DrawFormatString(0, 250, White, "mx:%dmy%d", moveto_x3, moveto_y3); //文字列表示

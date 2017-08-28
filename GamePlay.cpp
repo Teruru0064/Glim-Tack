@@ -40,9 +40,10 @@ void TestScene_set(void){
 	GetControllerState();
 	DispCursol();
 	menu_input();
-	//Board_draw();
 	Colt1_Update();
+	Colt2_Update();
 	FG_Draw();
+
 	
 
 }
