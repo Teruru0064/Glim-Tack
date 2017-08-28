@@ -48,6 +48,13 @@ int img_pallet2[5];
 //unit1は赤ずきん用、unit2は白雪用
 //int unit_1[6], unit_2[6];
 
+/**
+//コマの種類と紹介
+//コマ１：桂馬の動きで移動し、マスの色を変える。
+//コマ２：自分の色と同じマス(上下左右2コマ）を一気に塗る
+//コマ３：相手の陣地を自分の色に塗り替える
+*/
+
 //赤ずきん(イメージロード用)
 int RedHood;
 //白雪姫(イメージロード用)
@@ -55,6 +62,7 @@ int SnowWhite;
 
 //移動先を指定した時の到着地点のx.y座標(1はコマ①.2はコマ②.3はコマ③)
 int ArrivalPoint_1p_1x, ArrivalPoint_1p_1y;
+//移動先を指定した時の到着地点のx.y座標(1はコマ①.2はコマ②.3はコマ③)
 int ArrivalPoint_2p_1x, ArrivalPoint_2p_1y;
 
 
@@ -65,8 +73,8 @@ int colt_select_1p;
 int colt_select_2p;
 
 //スコア用変数
-int sumred = 0;
-int sumblue = 0;
+int sumred = 0;		//プレイヤー１スコア
+int sumblue = 0;	//プレイヤー２スコア
 
 //extern int mapdata[MapMaxX][MapMaxY];//描画用マップ
 //extern int mapdata2[MapMaxX][MapMaxY];//光る赤用
@@ -111,6 +119,7 @@ int mapX24, mapY24;//2p兵士2の1
 int end_mapX24, end_mapY24;//2p兵士2の1
 int mapX25, mapY25;//2p兵士3の1
 int mapX26, mapY26;//2p兵士3の2
+
 //制限時間を作る
 int GameTime = 0;
 int GameTime_Minute = 0;	//分表示用
@@ -166,6 +175,7 @@ void Test_init(void){
 	LoadDivGraph("colt_img/SnowWhite_Unit.png", 96, 2, 3, 96, 96, unit_2);*/
 	RedHood = LoadGraph("char_img/LittleRedRidingHood.png");
 	SnowWhite = LoadGraph("char_img/SnowWhite.png");
+
 	img_BG = LoadGraph("bg_img/BG.png");
 	img_BG_02 = LoadGraph("bg_img/BG_02.png");
 	img_book = LoadGraph("bg_img/book00.png");
