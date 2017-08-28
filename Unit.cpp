@@ -35,8 +35,9 @@ void Unit_Init(void){
 	//colt_select_1p = 1;
 	//colt_select_2p = 11;
 
-	LoadDivGraph("colt_img/LittleRedRidingHood_Unit.png", 96, 2, 3, 96, 96, RedHood_unit);
-	LoadDivGraph("colt_img/SnowWhite_Unit.png", 96, 2, 3, 96, 96, SnowWhite_unit);
+
+	LoadDivGraph("colt_img/LittleRedRidingHood_Unit.png", 6, 2, 3, 96, 96, RedHood_unit);
+	LoadDivGraph("colt_img/SnowWhite_Unit.png", 6, 2, 3, 96, 96, SnowWhite_unit);
 
 }
 

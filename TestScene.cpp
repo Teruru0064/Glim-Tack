@@ -177,7 +177,8 @@ void Test_init(void){
 	ArrivalPoint_2p_1y = 0;
 
 
-
+	//プレイヤー画像の読みこみ
+	Unit_Init();
 
 	Test_init_flag = 1;	//初期化完了
 
