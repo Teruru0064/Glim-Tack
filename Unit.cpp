@@ -1,19 +1,8 @@
 //各キャラのユニット表示　8/28追加
 
 #include "DxLib.h"
-#include "GameStatus.h"
-#include "Player.h"
 #include "GameInit.h"
-#include "Game_Info.h"
 #include "Colt.h"
-
-
-
-//unit1は赤ずきん用、unit2は白雪用
-//int unit_1[6], unit_2[6];
-
-
-
 
 //1pの選択状態 1はコマ①を選択中 2はコマ②を選択中 3はコマ③を選択中
 extern int colt_select_1p;
@@ -30,11 +19,6 @@ int SnowWhite_unit[6];
 
 //イメージロード
 void Unit_Init(void){
-
-	////ゲームが始まったときにコマ1を選択した状態
-	//colt_select_1p = 1;
-	//colt_select_2p = 11;
-
 
 	LoadDivGraph("colt_img/LittleRedRidingHood_Unit.png", 6, 2, 3, 96, 96, RedHood_unit);
 	LoadDivGraph("colt_img/SnowWhite_Unit.png", 6, 2, 3, 96, 96, SnowWhite_unit);
