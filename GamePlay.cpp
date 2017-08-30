@@ -35,7 +35,6 @@ void CharaSelect_set(void){
 //ゲーム画面を再生する
 void TestScene_set(void){
 
-
 	TestScene();
 	GetControllerState();
 	DispCursol();
@@ -51,7 +50,8 @@ void TestScene_set(void){
 //スコアシーンを再生する
 void Score_set(void){
 
-	Score();
+	//Score();
 	GetControllerState();
+	Score_Draw();
 
 }

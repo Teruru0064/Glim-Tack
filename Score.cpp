@@ -13,17 +13,24 @@ extern XINPUT_STATE XInputState1, XInputState2;
 extern int InputState1, InputState2;
 
 
+//スコア用変数
+extern int sumred;		//プレイヤー１スコア
+extern int sumblue;		//プレイヤー２スコア
+
+extern int White;
+
+
 //キャラクターのグラフィックハンドル
 
-//赤ずきん(01は勝ち、02は負け)
-int LRRH01_gh, LRRH02_gh;
-//白雪姫(01は勝ち、02は負け)
-int SW01_gh, SW02_gh;
+//白雪姫(00は待機中、01は勝ち、02は負け)
+int SW00_gh, SW01_gh, SW02_gh;
+//赤ずきん(00は待機中、01は勝ち、02は負け)
+int LRRH00_gh, LRRH01_gh, LRRH02_gh;
 /*
-//ヘンゼルとグレーテル(01は勝ち、02は負け)
-int HaG01_gh, HaG02_gh;
-//ラプンツェル(01は勝ち、02は負け)
-int Rap01_gh, Rap02_gh;
+//ヘンゼルとグレーテル(00は待機中、01は勝ち、02は負け)
+int HaG00_gh, HaG01_gh, HaG02_gh;
+//ラプンツェル(00は待機中、01は勝ち、02は負け)
+int Rap00_gh, Rap01_gh, Rap02_gh;
 */
 
 //スコア背景
@@ -50,10 +57,12 @@ void Score_init(void){
 	win_gh = LoadGraph("score_img\\win_BG.png");
 	lose_gh = LoadGraph("score_img\\lose.png");
 	draw_gh = LoadGraph("score_img\\draw.png");
-	LRRH01_gh = LoadGraph("score_img\\LRRH_Score01.png");
-	//LRRH02_gh = LoadGraph("score_img\\LRRH_Score02.png");
-	SW01_gh = LoadGraph("score_img\\SnowWhite_Score01.png");
+	SW00_gh = LoadGraph("score_img\\SnowWhite_Score01.png");
+	//SW01_gh = LoadGraph("score_img\\SnowWhite_Score01.png");
 	//SW02_gh = LoadGraph("score_img\\SnowWhite_Score02.png");
+	LRRH00_gh = LoadGraph("score_img\\LRRH_Stay.png");
+	LRRH01_gh = LoadGraph("score_img\\LRRH_Win.png");
+	LRRH02_gh = LoadGraph("score_img\\LRRH_Lose.png");
 	/*
 	HaG01_gh = LoadGraph("score_img\\H and G_Score01.png");
 	HaG02_gh = LoadGraph("score_img\\H and G_Score02.png");
@@ -82,7 +91,7 @@ void Score_delete(void){
 	DeleteGraph(score_BG_gh);
 }
 
-void Score(void){
+void Score_Draw(void){
 
 	//まだ初期化していないときは初期化処理をする
 	if (!score_init_flag){
@@ -91,6 +100,14 @@ void Score(void){
 
 	//背景描画
 	DrawGraph(0, 0, score_BG_gh, TRUE);
+	//キャラクター描画
+	DrawGraph(333, 352, SW00_gh, TRUE);
+	DrawGraph(709, 370, LRRH00_gh, TRUE);
+	//UIの描画
+	DrawGraph(315, 90, win_gh, TRUE);
+	DrawGraph(579, 90, lose_gh, TRUE);
+	DrawGraph(579, 90, vs_gh, TRUE);
+
 
 	//１Pコントローラーセット
 	GetJoypadXInputState(DX_INPUT_PAD1, &XInputState1);
@@ -105,5 +122,10 @@ void Score(void){
 	else{
 		key_enter = 0;
 	}
+
+
+	//スコア表示
+	DrawFormatString(920, 55, White, "%d", sumred);
+	DrawFormatString(340, 55, White, "%d", sumblue);
 
 }

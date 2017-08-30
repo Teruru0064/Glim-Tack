@@ -26,7 +26,6 @@ void Unit_Init(void){
 }
 
 
-
 //赤ずきんのユニット表示
 void RedHood_Unit_Draw(void){
 

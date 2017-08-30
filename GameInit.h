@@ -3,6 +3,7 @@
 #include "Title.h"
 #include "CharaSelect.h"
 #include "GamePlay.h"
+#include "Time.h"
 #include "Menu.h"
 #include "TestScene.h"
 #include "Score.h"

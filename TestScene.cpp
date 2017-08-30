@@ -44,10 +44,6 @@ int Test_init_flag = 0;
 extern int img_pallet[5];
 int img_pallet2[5];
 
-
-//unit1は赤ずきん用、unit2は白雪用
-//int unit_1[6], unit_2[6];
-
 /**
 //コマの種類と紹介
 //コマ１：桂馬の動きで移動し、マスの色を変える。
@@ -120,10 +116,6 @@ int end_mapX24, end_mapY24;//2p兵士2の1
 int mapX25, mapY25;//2p兵士3の1
 int mapX26, mapY26;//2p兵士3の2
 
-//制限時間を作る
-int GameTime = 0;
-int GameTime_Minute = 0;	//分表示用
-
 //兵士管理用フラグ兵士を使っているか使ってないか
 int RedTimeFlag11 = 0;//兵士1の1
 int RedTimeFlag12 = 0;//兵士1の2
@@ -157,22 +149,17 @@ int White;
 
 extern XINPUT_STATE XInputState1, XInputState2;
 extern int P1_x, P1_y, P2_x, P2_y;
-extern int menu_flg;
-
-
-
 
 
 int t = 0;
 int now_mapx, now_mapy;
+
 
 //初期化処理
 void Test_init(void){
 
 	//画像の読み込み
 	LoadDivGraph("map_img/pallet2.png", 64, 5, 1, 64, 64, img_pallet2);		//移動可能地点の光
-	/*LoadDivGraph("colt_img/LittleRedRidingHood_Unit.png", 96, 2, 3, 96, 96, unit_1);
-	LoadDivGraph("colt_img/SnowWhite_Unit.png", 96, 2, 3, 96, 96, unit_2);*/
 	RedHood = LoadGraph("char_img/LittleRedRidingHood.png");
 	SnowWhite = LoadGraph("char_img/SnowWhite.png");
 
@@ -186,11 +173,8 @@ void Test_init(void){
 	ArrivalPoint_2p_1x = 0;
 	ArrivalPoint_2p_1y = 0;
 
-
 	//プレイヤー画像の読みこみ
 	Unit_Init();
-
-	Test_init_flag = 1;	//初期化完了
 
 	//ゲームが始まったときにコマ1を選択した状態
 	colt_select_1p = 1;
@@ -199,9 +183,6 @@ void Test_init(void){
 	sumred = 0;
 	sumblue = 0;
 
-	//ゲームの制限時間
-	GameTime = 60 * 60;
-	GameTime_Minute = 2;
 
 	RedTimeFlag11 = 0;
 	RedTimeFlag12 = 0;
@@ -234,6 +215,7 @@ void RedFlag11(int mapX, int mapY){
 		RedTimeFlag11 = -1;
 	}
 }
+
 //兵士管理(赤　1-2)
 void RedFlag12(int mapX, int mapY){
 	if (RedTimeFlag12 == 0){
@@ -241,6 +223,7 @@ void RedFlag12(int mapX, int mapY){
 		RedTimeFlag11 = -1;
 	}
 }
+
 //兵士管理(赤　1-3)
 void RedFlag13(int mapX, int mapY){
 	if (RedTimeFlag13 == 0){
@@ -264,6 +247,7 @@ void RedFlag15(int mapX, int mapY){
 		RedTimeFlag15 = -1;
 	}
 }
+
 //兵士管理(青　1-1)
 void BlueFlag11(int mapX, int mapY){
 	if (BlueTimeFlag11 == 0){
@@ -271,6 +255,7 @@ void BlueFlag11(int mapX, int mapY){
 		BlueTimeFlag11 = -1;
 	}
 }
+
 //兵士管理(青　1-2)
 void BlueFlag12(int mapX, int mapY){
 	if (BlueTimeFlag12 == 0){
@@ -278,6 +263,7 @@ void BlueFlag12(int mapX, int mapY){
 		BlueTimeFlag11 = -1;
 	}
 }
+
 //兵士管理(青　1-3)
 void BlueFlag13(int mapX, int mapY){
 	if (BlueTimeFlag13 == 0){
@@ -285,6 +271,7 @@ void BlueFlag13(int mapX, int mapY){
 		//testselect = 0;
 	}
 }
+
 //兵士管理(青　3-1)
 void BlueFlag15(int mapX, int mapY){
 	if (BlueTimeFlag15 == 0){
@@ -300,6 +287,7 @@ void BlueFlag15(int mapX, int mapY){
 
 	}
 }
+
 //スコア関数
 void ScoreCheck(void){
 	sumred = 0;
@@ -356,6 +344,7 @@ void TestFirstRed2(int mapX, int mapY){
 		}
 	}
 }
+
 //兵士1塗り場所確定(相手)
 void TestFirstBlue2(int mapX, int mapY){
 	if (mapdata4[mapX][mapY] == 2){
@@ -392,6 +381,7 @@ void TestFirstBlue2(int mapX, int mapY){
 		}
 	}
 }
+
 //兵士1(自分)
 void TestFirstRed(int mapX, int mapY){
 
@@ -493,6 +483,7 @@ void TestFirstRed(int mapX, int mapY){
 			mapdata2[checkMapX2][mapY + 1] = 1;
 	}
 }
+
 //兵士1(相手)
 void TestFirstBlue(int mapX, int mapY){
 
@@ -584,10 +575,8 @@ void TestFirstBlue(int mapX, int mapY){
 		if (mapdata[checkMapX2][mapY + 1] != 200) mapdata4[checkMapX2][mapY + 1] = 2;
 	}
 
-
-
-
 }
+
 //兵士2　（自分）
 void TestSecondRed(int mapX, int mapY){
 	//左3マス以下右1マス
@@ -661,6 +650,7 @@ void TestSecondRed(int mapX, int mapY){
 		mapdata[mapX][mapY] = 1;
 	}
 }
+
 //兵士２　（相手）
 void TestSecondBlue(int mapX, int mapY){
 	//左3マス以下右1マス
@@ -750,6 +740,7 @@ void TestThirdRed2(int mapX, int mapY){
 		}
 	}
 }
+
 //兵士3(自分)
 void TestThirdRed(int mapX, int mapY){
 	colt_select_1p = 5;
@@ -844,6 +835,7 @@ void TestThirdRed(int mapX, int mapY){
 		if (mapdata[checkMapX2][mapY + 1] == 2) mapdata2[checkMapX2][mapY + 1] = 1;
 	}
 }
+
 //兵士3塗り場所確定（相手）
 void TestThirdBlue2(int mapX, int mapY){
 	if (mapdata4[mapX][mapY] == 2){
@@ -860,6 +852,7 @@ void TestThirdBlue2(int mapX, int mapY){
 		}
 	}
 }
+
 //兵士3（相手）
 void TestThirdBlue(int mapX, int mapY){
 	colt_select_2p = 15;
@@ -961,44 +954,22 @@ void TestScene(void){
 	if (!Test_init_flag){
 		Test_init();
 		FG_Init();
+		Time_Init();
+		Test_init_flag = 1;	//初期化完了
 	}
-	/////////////////////////////////////////////////////
-
+	
 	//背景描画
 	DrawGraph(0, 0, img_BG, TRUE);
 	DrawGraph(15, 620, img_book, TRUE);
 	DrawGraph(1035, 620, img_book, TRUE);
 	DrawGraph(0, 0, img_BG_02, TRUE);
+
 	//キャラクター描画
 	DrawGraph(1039, 370, RedHood, TRUE);
 	DrawGraph(20, 384, SnowWhite, TRUE);
-
-
-
-
-	//////////////////////////////////////////////////////
-
-	/////////////////////////////////////////////////
-
-	//ゲーム起動中は時間を減少させる
-	//ゲーム終了
-	if (!menu_flg)GameTime--;
-
-	if (GameTime == 0 && GameTime_Minute == 0) {
-		game_status = SCORE;
-	}
-	if (GameTime <= 0){
-		GameTime = 60 * 60;
-		--GameTime_Minute;
-	}
-
-
-	/////////////////////////////////////////////////
-	//コマ3使用可能時間
-	if (GameTime == (180 * 60) - (30 * 60)){
-		RedTimeFlag15 = 0;
-		BlueTimeFlag15 = 0;
-	}
+	
+	//タイムの表示
+	Time_Update();
 
 	//DrawFormatString(1000, 400, White, "時間 %d", RedTime11);
 	//DrawFormatString(1000, 450, White, "時間 %d", RedTime12);
@@ -1324,7 +1295,6 @@ void TestScene(void){
 	}
 
 
-
 	//ボードと色の表示
 	Board_draw();
 
@@ -1578,7 +1548,6 @@ void TestScene(void){
 	//Colt3_Draw();
 
 
-	DrawFormatString(545, 50, White, "のこり %d:%02d", GameTime_Minute, GameTime / 60); //文字列表示
 	//スコア表示
 	DrawFormatString(920, 55, White, "%d", sumred);
 	DrawFormatString(340, 55, White, "%d", sumblue);
@@ -1591,6 +1560,4 @@ void TestScene(void){
 	//DrawFormatString(0, 200, White, "mx:%dmy%d", moveto_x2, moveto_y2); //文字列表示
 	//DrawFormatString(0, 250, White, "mx:%dmy%d", moveto_x3, moveto_y3); //文字列表示
 
-
 }
-
