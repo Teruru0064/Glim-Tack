@@ -54,22 +54,28 @@ void Score_init(void){
 
 	//画像の読み込み
 	score_BG_gh = LoadGraph("score_img\\Score_BG.png");
-	win_gh = LoadGraph("score_img\\win_BG.png");
+	win_gh = LoadGraph("score_img\\win.png");
 	lose_gh = LoadGraph("score_img\\lose.png");
 	draw_gh = LoadGraph("score_img\\draw.png");
-	SW00_gh = LoadGraph("score_img\\SnowWhite_Score01.png");
-	//SW01_gh = LoadGraph("score_img\\SnowWhite_Score01.png");
-	//SW02_gh = LoadGraph("score_img\\SnowWhite_Score02.png");
+	vs_gh = LoadGraph("score_img\\vs.png");
+	//白雪姫
+	SW00_gh = LoadGraph("score_img\\SnowWhite_Stay.png");
+	//SW01_gh = LoadGraph("score_img\\SnowWhite_Win.png");
+	SW02_gh = LoadGraph("score_img\\SnowWhite_Lose.png");
+	//赤ずきん
 	LRRH00_gh = LoadGraph("score_img\\LRRH_Stay.png");
 	LRRH01_gh = LoadGraph("score_img\\LRRH_Win.png");
 	LRRH02_gh = LoadGraph("score_img\\LRRH_Lose.png");
 	/*
+	//ヘンゼルとグレーテル
+	HaG00_gh = LoadGraph("score_img\\H and G_Score01.png");
 	HaG01_gh = LoadGraph("score_img\\H and G_Score01.png");
 	HaG02_gh = LoadGraph("score_img\\H and G_Score02.png");
+	//ラプンツェル
+	Rap00_gh = LoadGraph("score_img\\Rapunzel_Score01.png");
 	Rap01_gh = LoadGraph("score_img\\Rapunzel_Score01.png");
 	Rap02_gh = LoadGraph("score_img\\Rapunzel_Score02.png");
 	*/
-	vs_gh = LoadGraph("score_img\\vs.png");
 	/*
 	zero_gh = LoadGraph("score_img\\zero.png");
 	one_gh = LoadGraph("score_img\\one.png");
@@ -100,13 +106,54 @@ void Score_Draw(void){
 
 	//背景描画
 	DrawGraph(0, 0, score_BG_gh, TRUE);
+
 	//キャラクター描画
-	DrawGraph(333, 352, SW00_gh, TRUE);
-	DrawGraph(709, 370, LRRH00_gh, TRUE);
+	//DrawGraph(333, 352, SW00_gh, TRUE);
+	//DrawGraph(709, 370, LRRH00_gh, TRUE);
+
 	//UIの描画
-	DrawGraph(315, 90, win_gh, TRUE);
-	DrawGraph(579, 90, lose_gh, TRUE);
-	DrawGraph(579, 90, vs_gh, TRUE);
+	DrawGraph(579, 319, vs_gh, TRUE);
+
+
+	//勝敗の出力
+
+	//1Pのスコアが2Pより高かったら1Pに「かち」2Pに「まけ」を表示
+	if (sumred > sumblue){
+		//かち
+		DrawGraph(800, 65, win_gh, TRUE);
+		//まけ
+		DrawGraph(164, 65, lose_gh, TRUE);
+
+		//1Pと2Pのキャラクター表示
+
+		//1Pかち
+		DrawGraph(856, 242, LRRH01_gh, TRUE);
+		//2Pまけ
+		DrawGraph(156, 350, SW02_gh, TRUE);
+
+	}
+	//1Pのスコアが2Pより低かったら1Pに「まけ」2Pに「かち」を表示
+	else if (sumred < sumblue){
+		//まけ
+		DrawGraph(800, 65, lose_gh, TRUE);
+		//かち
+		DrawGraph(164, 65, win_gh, TRUE);
+
+		//1Pと2Pのキャラクター表示
+		//1Pかち
+		DrawGraph(156, 350, SW02_gh, TRUE);
+		//2Pまけ
+		DrawGraph(891, 400, LRRH02_gh, TRUE);
+	}
+	//1Pと2Pのスコアが同じならば「ひきわけ」を表示
+	else if (sumred == sumblue){
+		//ひきわけ
+		DrawGraph(417, 65, draw_gh, TRUE);
+		//1Pと2Pのキャラクター表示
+		DrawGraph(333, 352, SW00_gh, TRUE);
+		DrawGraph(709, 370, LRRH00_gh, TRUE);
+	}
+	
 
 
 	//１Pコントローラーセット
@@ -125,7 +172,7 @@ void Score_Draw(void){
 
 
 	//スコア表示
-	DrawFormatString(920, 55, White, "%d", sumred);
-	DrawFormatString(340, 55, White, "%d", sumblue);
+	DrawFormatString(737, 360, White, "%d", sumred);
+	DrawFormatString(540, 360, White, "%d", sumblue);
 
 }

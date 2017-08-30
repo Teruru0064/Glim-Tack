@@ -15,7 +15,7 @@ extern int menu_flg;
 void Time_Init(void){
 
 	//ƒQ[ƒ€‚Ì§ŒÀŠÔ
-	GameTime = 1 * 60;
+	GameTime = 20 * 60;
 	GameTime_Minute = 0;
 
 }
