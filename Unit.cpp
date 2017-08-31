@@ -15,6 +15,13 @@ int RedHood_unit[6];
 //白雪姫用
 int SnowWhite_unit[6];
 
+//1Pと2Pのユニット位置
+int UnitSet_1p = 80, UnitSet_2p = 1104;
+//ユニット使用可能時点灯
+//01はコマ①、02はコマ②、03はコマ③
+int Unit01 = 20, Unit02 = 136, Unit03 = 252;
+
+
 
 
 //イメージロード
@@ -30,22 +37,22 @@ void Unit_Init(void){
 void RedHood_Unit_Draw(void){
 
 	if (colt_select_1p != 1){
-		DrawGraph(1104, 20, RedHood_unit[0], true);
+		DrawGraph(UnitSet_1p, Unit01, RedHood_unit[0], true);
 	}
 	else{
-		DrawGraph(1104, 20, RedHood_unit[1], true);
+		DrawGraph(UnitSet_1p, Unit01, RedHood_unit[1], true);
 	}
 	if (colt_select_1p != 2){
-		DrawGraph(1104, 136, RedHood_unit[2], true);
+		DrawGraph(UnitSet_1p, Unit02, RedHood_unit[2], true);
 	}
 	else{
-		DrawGraph(1104, 136, RedHood_unit[3], true);
+		DrawGraph(UnitSet_1p, Unit02, RedHood_unit[3], true);
 	}
 	if (colt_select_1p != 3){
-		DrawGraph(1104, 252, RedHood_unit[4], true);
+		DrawGraph(UnitSet_1p, Unit03, RedHood_unit[4], true);
 	}
 	else{
-		DrawGraph(1104, 252, RedHood_unit[5], true);
+		DrawGraph(UnitSet_1p, Unit03, RedHood_unit[5], true);
 	}
 }
 
@@ -54,21 +61,21 @@ void RedHood_Unit_Draw(void){
 void SnowWhite_Unit_Draw(void){
 
 	if (colt_select_2p != 11){
-		DrawGraph(80, 20, SnowWhite_unit[0], true);
+		DrawGraph(UnitSet_2p, Unit01, SnowWhite_unit[0], true);
 	}
 	else{
-		DrawGraph(80, 20, SnowWhite_unit[1], true);
+		DrawGraph(UnitSet_2p, Unit01, SnowWhite_unit[1], true);
 	}
 	if (colt_select_2p != 12){
-		DrawGraph(80, 136, SnowWhite_unit[2], true);
+		DrawGraph(UnitSet_2p, Unit02, SnowWhite_unit[2], true);
 	}
 	else{
-		DrawGraph(80, 136, SnowWhite_unit[3], true);
+		DrawGraph(UnitSet_2p, Unit02, SnowWhite_unit[3], true);
 	}
 	if (colt_select_2p != 13){
-		DrawGraph(80, 252, SnowWhite_unit[4], true);
+		DrawGraph(UnitSet_2p, Unit03, SnowWhite_unit[4], true);
 	}
 	else{
-		DrawGraph(80, 252, SnowWhite_unit[5], true);
+		DrawGraph(UnitSet_2p, Unit03, SnowWhite_unit[5], true);
 	}
 }

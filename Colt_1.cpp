@@ -7,7 +7,7 @@
 #include "Colt.h"
 
 extern int Board_X, Board_Y;
-
+extern int nonanim;
 //コマ①のグラフィックハンドル
 struct Coltgame_obj colt1[3],colt1_2[3];
 
@@ -63,9 +63,9 @@ void Colt1_init(void){
 		colt1_2[i].MoveCounter = 0;
 		colt1_2[i].active = 0;
 
-		colt1[i].mapx = MapMaxX - 1; colt1[i].mapy = MapMaxY - 1;
+		colt1[i].mapx = 0; colt1[i].mapy = 0;
 
-		colt1_2[i].mapx = 0; colt1_2[i].mapy = 0;
+		colt1_2[i].mapx = MapMaxX - 1; colt1_2[i].mapy = MapMaxY - 1;
 
 	}
 
@@ -113,6 +113,8 @@ void Colt1_Draw(void){
 
 	//colt1[0].active = 1;
 
+	if (!nonanim) AnimeCounter++;
+	//AnimeCounter++;
 	for (int i = 0; i < 3; i++){
 		if (colt1[i].active){
 
@@ -126,7 +128,7 @@ void Colt1_Draw(void){
 				(colt1[i].mapy) * MAP_SIZE + Board_Y + move_y[i], colt1[i].anime_gh[colt1[i].CurFrame], TRUE);
 
 			DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", colt1[i].CurFrame);
-			AnimeCounter++;
+			// AnimeCounter++;
 
 			colt1[i].CurFrame = AnimeCounter / colt1[i].AnimSpeed % colt1[i].AnimFrameNum + colt1[i].AnimStart;
 		}
@@ -145,7 +147,7 @@ void Colt1_Draw(void){
 				(colt1_2[i].mapy) * MAP_SIZE + Board_Y + move_y02[i], colt1_2[i].anime_gh[colt1_2[i].CurFrame], TRUE);
 
 			DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", colt1_2[i].CurFrame);
-			AnimeCounter++;
+			//if (!nonanim) AnimeCounter++;
 
 			colt1_2[i].CurFrame = AnimeCounter / colt1_2[i].AnimSpeed % colt1_2[i].AnimFrameNum + colt1_2[i].AnimStart;
 		}

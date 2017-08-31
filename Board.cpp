@@ -9,12 +9,12 @@ int Board_X, Board_Y;
 int img_board;
 
 //拠点マス
-int homepallet[5];
+//0=ダミー,1=赤ずきん,2=白雪姫,3=ヘングレ,4=ラプンツェル
+int homespot[5];
 
-int img_pallet[5];
-
-//変更テスト
-
+//自マスデザイン
+//0=ボード(空白マス),1=赤ずきん,2=白雪姫,3=ヘングレ,4=ラプンツェル
+int paint[5];
 
 int mapdata[MapMaxX][MapMaxY];//描画用マップ
 int mapdata2[MapMaxX][MapMaxY];//光る赤用
@@ -41,8 +41,8 @@ int mapdata26[MapMaxX][MapMaxY];//2p兵士3の2
 
 void Board_init(void){
 
-	LoadDivGraph("map_img/HomePallet.png", 64, 5, 1, 64, 64, homepallet);
-	LoadDivGraph("map_img/pallet.jpg", 64, 5, 1, 64, 64, img_pallet);
+	LoadDivGraph("map_img/HomeSpot.png", 64, 5, 1, 64, 64, homespot);
+	LoadDivGraph("map_img/paint.jpg", 64, 5, 1, 64, 64, paint);
 
 	//マップデータの初期化
 	//ZeroMemory(mapdata, sizeof(int));
@@ -53,9 +53,17 @@ void Board_init(void){
 	}
 	Board_X = 256;
 	Board_Y = 128;
+
+
 }
 
 void Board_draw(void){
+
+	////１ｐの初期位置
+	//mapdata[0][MapMaxY - 1] = 100;
+	////２ｐの初期位置
+	//mapdata[MapMaxX - 1][0] = 200;
+
 
 	//色の表示
 	for (int i = 0; i < MapMaxX; i++){
@@ -63,19 +71,19 @@ void Board_draw(void){
 			switch (mapdata[i][j]){
 			case 0:
 				//ボードの表示
-				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet[0], true);
+				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, paint[0], true);
 				break;
 			case 1:
-				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet[1], true);
+				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, paint[1], true);
 				break;
 			case 2:
-				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet[2], true);
+				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, paint[2], true);
 				break;
 			case 100:
-				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, homepallet[1], true);
+				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, homespot[1], true);
 				break;
 			case 200:
-				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, homepallet[2], true);
+				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, homespot[2], true);
 				break;
 			}
 		}

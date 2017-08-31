@@ -14,8 +14,8 @@ extern int InputState1, InputState2;
 
 
 //スコア用変数
-extern int sumred;		//プレイヤー１スコア
-extern int sumblue;		//プレイヤー２スコア
+extern int sumscore_1p;		//プレイヤー１スコア
+extern int sumscore_2p;		//プレイヤー２スコア
 
 extern int White;
 
@@ -36,11 +36,16 @@ int Rap00_gh, Rap01_gh, Rap02_gh;
 //スコア背景
 int score_BG_gh;
 
+//vsのグラフィックハンドル
+int vs_gh;
+
+//ボタン
+int button_gh[2];
+
 //勝敗結果のテキスト画像(勝ち、負け、引き分け)
 int win_gh, lose_gh, draw_gh;
 
-//スコアのvs画像
-int vs_gh;
+
 /*
 //0～9までの数字テキスト
 int zero_gh,one_gh, tow_gh, three_gh, four_gh,
@@ -58,9 +63,11 @@ void Score_init(void){
 	lose_gh = LoadGraph("score_img\\lose.png");
 	draw_gh = LoadGraph("score_img\\draw.png");
 	vs_gh = LoadGraph("score_img\\vs.png");
+	button_gh[0] = LoadGraph("score_img\\button_01.png");
+	button_gh[1] = LoadGraph("score_img\\button_02.png");
 	//白雪姫
 	SW00_gh = LoadGraph("score_img\\SnowWhite_Stay.png");
-	//SW01_gh = LoadGraph("score_img\\SnowWhite_Win.png");
+	SW01_gh = LoadGraph("score_img\\SnowWhite_Win.png");
 	SW02_gh = LoadGraph("score_img\\SnowWhite_Lose.png");
 	//赤ずきん
 	LRRH00_gh = LoadGraph("score_img\\LRRH_Stay.png");
@@ -114,11 +121,13 @@ void Score_Draw(void){
 	//UIの描画
 	DrawGraph(579, 319, vs_gh, TRUE);
 
+	DrawGraph(449, 588, button_gh[GetNowCount() / 500 % 2] , TRUE);
+	//DrawGraph(449, 588, button02_gh, TRUE);
 
 	//勝敗の出力
 
 	//1Pのスコアが2Pより高かったら1Pに「かち」2Pに「まけ」を表示
-	if (sumred > sumblue){
+	if (sumscore_1p > sumscore_2p){
 		//かち
 		DrawGraph(800, 65, win_gh, TRUE);
 		//まけ
@@ -126,35 +135,45 @@ void Score_Draw(void){
 
 		//1Pと2Pのキャラクター表示
 
-		//1Pかち
-		DrawGraph(856, 242, LRRH01_gh, TRUE);
-		//2Pまけ
-		DrawGraph(156, 350, SW02_gh, TRUE);
+		//1Pかち(反転描画)
+		DrawTurnGraph(59, 242, LRRH01_gh, TRUE);
+		//2Pまけ(反転描画)
+		DrawTurnGraph(856, 350, SW02_gh, TRUE);
 
 	}
 	//1Pのスコアが2Pより低かったら1Pに「まけ」2Pに「かち」を表示
-	else if (sumred < sumblue){
+	else if (sumscore_1p < sumscore_2p){
 		//まけ
 		DrawGraph(800, 65, lose_gh, TRUE);
 		//かち
 		DrawGraph(164, 65, win_gh, TRUE);
 
 		//1Pと2Pのキャラクター表示
-		//1Pかち
-		DrawGraph(156, 350, SW02_gh, TRUE);
-		//2Pまけ
-		DrawGraph(891, 400, LRRH02_gh, TRUE);
+		//1Pまけ
+		DrawGraph(81, 400, LRRH02_gh,  TRUE);
+		//2Pかち
+		DrawGraph(891, 256, SW01_gh, TRUE);
 	}
 	//1Pと2Pのスコアが同じならば「ひきわけ」を表示
-	else if (sumred == sumblue){
+	else if (sumscore_1p == sumscore_1p){
 		//ひきわけ
 		DrawGraph(417, 65, draw_gh, TRUE);
 		//1Pと2Pのキャラクター表示
 		DrawGraph(333, 352, SW00_gh, TRUE);
 		DrawGraph(709, 370, LRRH00_gh, TRUE);
 	}
-	
 
+
+	//文字設定
+	
+	//サイズ設定
+	SetFontSize(80);
+	//フォント設定
+	ChangeFont("mini-わくわく");
+	
+	//スコア表示
+	DrawFormatString(710, 320, White, "%03d", sumscore_1p);
+	DrawFormatString(400, 320, White, "%03d", sumscore_2p);
 
 	//１Pコントローラーセット
 	GetJoypadXInputState(DX_INPUT_PAD1, &XInputState1);
@@ -162,17 +181,11 @@ void Score_Draw(void){
 	if (CheckHitKey(KEY_INPUT_RETURN) == 1 || XInputState1.Buttons[13]) {
 		if (key_enter == 0){
 			game_status = TITLE;
-			GameTime = 6 * 60;
 			key_enter = 1;
 		}
 	}
 	else{
 		key_enter = 0;
 	}
-
-
-	//スコア表示
-	DrawFormatString(737, 360, White, "%d", sumred);
-	DrawFormatString(540, 360, White, "%d", sumblue);
 
 }

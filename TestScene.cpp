@@ -41,8 +41,8 @@ int img_book;
 
 
 int Test_init_flag = 0;
-extern int img_pallet[5];
-int img_pallet2[5];
+//コマの移動可能地点に表示される色
+int spotlight[5];
 
 /**
 //コマの種類と紹介
@@ -69,8 +69,8 @@ int colt_select_1p;
 int colt_select_2p;
 
 //スコア用変数
-int sumred = 0;		//プレイヤー１スコア
-int sumblue = 0;	//プレイヤー２スコア
+int sumscore_1p;	//プレイヤー１スコア
+int sumscore_2p;	//プレイヤー２スコア
 
 //extern int mapdata[MapMaxX][MapMaxY];//描画用マップ
 //extern int mapdata2[MapMaxX][MapMaxY];//光る赤用
@@ -159,7 +159,7 @@ int now_mapx, now_mapy;
 void Test_init(void){
 
 	//画像の読み込み
-	LoadDivGraph("map_img/pallet2.png", 64, 5, 1, 64, 64, img_pallet2);		//移動可能地点の光
+	LoadDivGraph("map_img/spotlight.png", 5, 5, 1, 64, 64, spotlight);		//移動可能地点の光
 	RedHood = LoadGraph("char_img/LittleRedRidingHood.png");
 	SnowWhite = LoadGraph("char_img/SnowWhite.png");
 
@@ -180,8 +180,8 @@ void Test_init(void){
 	colt_select_1p = 1;
 	colt_select_2p = 11;
 
-	sumred = 0;
-	sumblue = 0;
+	sumscore_1p = 0;
+	sumscore_2p = 0;
 
 
 	RedTimeFlag11 = 0;
@@ -290,18 +290,18 @@ void BlueFlag15(int mapX, int mapY){
 
 //スコア関数
 void ScoreCheck(void){
-	sumred = 0;
-	sumblue = 0;
+	sumscore_1p = 0;
+	sumscore_2p = 0;
 	for (int i = 0; i < MapMaxX; i++){
 		for (int j = 0; j < MapMaxY; j++){
 			switch (mapdata[i][j]){
 			case 0:
 				break;
 			case 1:
-				sumred += 1;
+				sumscore_1p += 1;
 				break;
 			case 2:
-				sumblue += 1;
+				sumscore_2p += 1;
 				break;
 			}
 		}
@@ -965,11 +965,11 @@ void TestScene(void){
 	DrawGraph(0, 0, img_BG_02, TRUE);
 
 	//キャラクター描画
-	DrawGraph(1039, 370, RedHood, TRUE);
-	DrawGraph(20, 384, SnowWhite, TRUE);
-	
-	//タイムの表示
-	Time_Update();
+	//DrawGraph(1039, 370, RedHood, TRUE);
+	//DrawGraph(20, 384, SnowWhite, TRUE);
+
+	DrawGraph(20, 370, RedHood, TRUE);
+	DrawGraph(1039, 384, SnowWhite, TRUE);
 
 	//DrawFormatString(1000, 400, White, "時間 %d", RedTime11);
 	//DrawFormatString(1000, 450, White, "時間 %d", RedTime12);
@@ -1055,7 +1055,7 @@ void TestScene(void){
 		BlueTime15 = 10 * 60;
 	}
 
-	//マウスクリックした所を色を変える
+	//マウスクリックした所の色を変える
 	GetMousePoint(&mouseX, &mouseY);
 	GetMousePoint(&mouseX02, &mouseY02);
 
@@ -1067,9 +1067,9 @@ void TestScene(void){
 
 
 	//１ｐの初期位置
-	mapdata[MapMaxX - 1][MapMaxY - 1] = 100;
+	mapdata[0][0] = 100;
 	//２ｐの初期位置
-	mapdata[0][0] = 200;
+	mapdata[MapMaxX - 1][MapMaxY - 1] = 200;
 
 
 	GetJoypadXInputState(DX_INPUT_PAD1, &XInputState1);
@@ -1324,7 +1324,7 @@ void TestScene(void){
 				if (colt_select_1p == 4 || colt_select_1p == 5)
 					//ここでコマの画像を表示させる場合
 
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[2], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[1], true);
 				break;
 			}
 		}
@@ -1336,7 +1336,7 @@ void TestScene(void){
 			switch (mapdata3[i][j]){
 			case 1:
 				if (colt_select_1p == 5)
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[2], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[1], true);
 				break;
 			}
 		}
@@ -1348,7 +1348,7 @@ void TestScene(void){
 			switch (mapdata4[i][j]){
 			case 2:
 				if (colt_select_2p == 14 || colt_select_2p == 15)
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[2], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[2], true);
 				break;
 			}
 		}
@@ -1360,7 +1360,7 @@ void TestScene(void){
 			switch (mapdata5[i][j]){
 			case 2:
 				if (colt_select_2p == 15)
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[2], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[2], true);
 				break;
 			}
 		}
@@ -1372,7 +1372,7 @@ void TestScene(void){
 			switch (mapdata11[i][j]){
 			case 1:
 				if (RedTimeFlag11 == 1){
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[2], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[1], true);
 					if (colt1[t].mapy < moveto_y) {
 						Colt1_move1p_down();
 					}
@@ -1396,7 +1396,7 @@ void TestScene(void){
 			switch (mapdata12[i][j]){
 			case 1:
 				if (RedTimeFlag12 == 1){
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[2], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[1], true);
 					if (colt1[t].mapy < moveto_y2) {
 						Colt1_move1p_down();
 					}
@@ -1420,7 +1420,7 @@ void TestScene(void){
 			switch (mapdata13[i][j]){
 			case 1:
 				if (RedTimeFlag13 == 1){
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[1], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[1], true);
 					if (colt1[t].mapy < moveto_y3) {
 						Colt1_move1p_down();
 					}
@@ -1444,7 +1444,7 @@ void TestScene(void){
 			switch (mapdata15[i][j]){
 			case 1:
 				if (RedTimeFlag15 == 1)
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[1], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[1], true);
 				break;
 			}
 		}
@@ -1456,7 +1456,7 @@ void TestScene(void){
 			case 1:
 				if (BlueTimeFlag11 == 1){
 					//↓ここ画像する
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[2], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[2], true);
 					if (colt1_2[t].mapy < moveto2_y) {
 						Colt1_move2p_down();
 					}
@@ -1483,7 +1483,7 @@ void TestScene(void){
 			switch (mapdata22[i][j]){
 			case 1:
 				if (BlueTimeFlag12 == 1)
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[2], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[2], true);
 				if (colt1_2[t].mapy < moveto2_y) {
 					Colt1_move2p_down();
 				}
@@ -1507,7 +1507,7 @@ void TestScene(void){
 			switch (mapdata23[i][j]){
 			case 1:
 				if (BlueTimeFlag13 == 1)
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[2], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[2], true);
 				if (colt1_2[t].mapy < moveto2_y) {
 					Colt1_move2p_down();
 				}
@@ -1531,7 +1531,7 @@ void TestScene(void){
 			switch (mapdata25[i][j]){
 			case 1:
 				if (BlueTimeFlag15 == 1)
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, img_pallet2[2], true);
+					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[2], true);
 				break;
 			}
 		}
@@ -1549,8 +1549,11 @@ void TestScene(void){
 
 
 	//スコア表示
-	DrawFormatString(920, 55, White, "%d", sumred);
-	DrawFormatString(340, 55, White, "%d", sumblue);
+	DrawFormatString(920, 55, White, "%d", sumscore_1p);
+	DrawFormatString(340, 55, White, "%d", sumscore_2p);
+
+	//タイムの表示
+	Time_Update();
 
 
 	//DrawFormatString(0, 0, White, "select %d", colt_select_1p);

@@ -21,6 +21,7 @@ void Controller_Init(){
 	cur_gh[0] = LoadGraph("game_img/Cursor_1P.png");
 	cur_gh[1] = LoadGraph("game_img/Cursor_2P.png");
 	SetJoypadDeadZone(DX_INPUT_PAD1, 0.4f);
+	SetJoypadDeadZone(DX_INPUT_PAD2, 0.4f);
 }
 
 void GetControllerState(){
