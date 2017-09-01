@@ -15,6 +15,10 @@ extern int menu_flg;
 //しゅ～りょ～のグラフィックハンドル
 int End_gh;
 int text_x ;
+
+//スコア画面の開始時間
+int ScoreStart;
+
 void Time_Init(void){
 	//イメージロード
 	End_gh = LoadGraph("game_img\\end.png");
@@ -36,9 +40,10 @@ void Time_Update(void){
 		//game_status = SCORE;
 		//しゅ～りょ～の表示
 		DrawGraph(text_x, 200, End_gh, TRUE);
-		text_x -= 10;
-		if (text_x < -1486) game_status = SCORE;
+		text_x -= 12;
+		if (text_x < -1700) game_status = SCORE;
 			nonanim = 1;
+			ScoreStart = GetNowCount();
 	}
 	else{
 		nonanim = 0;

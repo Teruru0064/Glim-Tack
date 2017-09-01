@@ -969,7 +969,7 @@ void TestScene(void){
 	//DrawGraph(20, 384, SnowWhite, TRUE);
 
 	DrawGraph(20, 370, RedHood, TRUE);
-	DrawGraph(1039, 384, SnowWhite, TRUE);
+	DrawTurnGraph(1039, 384, SnowWhite, TRUE);
 
 	//DrawFormatString(1000, 400, White, "時間 %d", RedTime11);
 	//DrawFormatString(1000, 450, White, "時間 %d", RedTime12);
@@ -1066,10 +1066,10 @@ void TestScene(void){
 	int mouseY2 = (mouseY - Board_Y) / 64;
 
 
-	//１ｐの初期位置
-	mapdata[0][0] = 100;
-	//２ｐの初期位置
-	mapdata[MapMaxX - 1][MapMaxY - 1] = 200;
+	////１ｐの初期位置
+	//mapdata[0][0] = 100;
+	////２ｐの初期位置
+	//mapdata[MapMaxX - 1][MapMaxY - 1] = 200;
 
 
 	GetJoypadXInputState(DX_INPUT_PAD1, &XInputState1);
@@ -1544,13 +1544,10 @@ void TestScene(void){
 
 	//コマの表示
 	Colt1_Draw();
-	//Colt2_Draw();
-	//Colt3_Draw();
-
 
 	//スコア表示
-	DrawFormatString(920, 55, White, "%d", sumscore_1p);
-	DrawFormatString(340, 55, White, "%d", sumscore_2p);
+	DrawFormatString(340, 55, White, "%d", sumscore_1p);
+	DrawFormatString(920, 55, White, "%d", sumscore_2p);
 
 	//タイムの表示
 	Time_Update();

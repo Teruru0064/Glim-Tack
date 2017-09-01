@@ -3,7 +3,8 @@
 #include "Player.h"
 #include "Controller.h"
 
-int title_gh, name_gh, window_gh, Button1_gh, Button2_gh, start_gh, end_gh;
+int title01_gh, title02_gh;
+int name_gh, window_gh, Button1_gh, Button2_gh, start_gh, end_gh;
 extern int game_status;
 extern char KeyBuf[];
 //スタート・おわりのフラグ宣言
@@ -25,7 +26,8 @@ extern int InputState1, InputState2;
 void Title_init(void){
 
 	//イメージのロード
-	title_gh = LoadGraph("img\\Title.png");
+	title01_gh = LoadGraph("title_img\\Title_BG.png");
+	title02_gh = LoadGraph("title_img\\Title_BG.png");
 	name_gh = LoadGraph("img\\Titlename.png");
 	window_gh = LoadGraph("img\\Window.png");
 	Button1_gh = LoadGraph("img\\Button1.png");
@@ -40,7 +42,8 @@ void Title_init(void){
 void Title_delete(void){
 
 	//イメージのデリート
-	DeleteGraph(title_gh);
+	DeleteGraph(title01_gh);
+	DeleteGraph(title02_gh);
 	DeleteGraph(name_gh);
 	DeleteGraph(Button1_gh);
 	DeleteGraph(Button2_gh);
@@ -55,7 +58,8 @@ void Title(void){
 		Title_init();
 	}
 	//背景描画
-	DrawGraph(0, 0, title_gh, TRUE);
+	DrawGraph(0, 0, title01_gh, TRUE);
+	DrawGraph(0, 0, title02_gh, TRUE);
 	DrawGraph(454, 440, window_gh, TRUE);
 	DrawGraph(225, 50, name_gh, TRUE);
 

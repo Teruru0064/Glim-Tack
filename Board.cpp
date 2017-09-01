@@ -59,10 +59,10 @@ void Board_init(void){
 
 void Board_draw(void){
 
-	////１ｐの初期位置
-	//mapdata[0][MapMaxY - 1] = 100;
-	////２ｐの初期位置
-	//mapdata[MapMaxX - 1][0] = 200;
+	//１ｐの初期位置
+	mapdata[0][MapMaxY - 1] = 100;
+	//２ｐの初期位置
+	mapdata[MapMaxX - 1][0] = 200;
 
 
 	//色の表示

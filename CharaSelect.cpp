@@ -38,7 +38,7 @@ void ChaarSelect_delete(void){
 void CharaSelect(void){
 	//‚Ü‚¾‰Šú‰»‚µ‚Ä‚¢‚È‚¢‚Æ‚«‚Í‰Šú‰»ˆ—‚ğ‚·‚é
 	if (!score_init_flag){
-		Score_init();
+		Score_Init();
 	}
 	//”wŒi•`‰æ
 	//DrawGraph(0, 0, score_gh, TRUE);

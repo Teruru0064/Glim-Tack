@@ -63,9 +63,9 @@ void Colt1_init(void){
 		colt1_2[i].MoveCounter = 0;
 		colt1_2[i].active = 0;
 
-		colt1[i].mapx = 0; colt1[i].mapy = 0;
+		colt1[i].mapx = 0; colt1[i].mapy = MapMaxY - 1;
 
-		colt1_2[i].mapx = MapMaxX - 1; colt1_2[i].mapy = MapMaxY - 1;
+		colt1_2[i].mapx = MapMaxX - 1; colt1_2[i].mapy = 0;
 
 	}
 
