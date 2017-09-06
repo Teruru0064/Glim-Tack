@@ -165,7 +165,7 @@ void Title(void){
 				game_status = CHARASELECT;
 				break;
 			case 1:
-				//game_status = GAMEEND;
+				///game_status = GAMEEND;
 				break;
 			case 2:
 				game_status = GAMEEND;
