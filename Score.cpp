@@ -132,6 +132,7 @@ void Score_Delete(void){
 		DeleteGraph(LRRH00_gh);
 		//”’á•P
 		DeleteGraph(SW00_gh);
+
 	}
 
 

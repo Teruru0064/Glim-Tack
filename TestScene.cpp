@@ -29,6 +29,7 @@ char KeyBuf[];
 int moveto_x, moveto_y;
 int moveto_x2, moveto_y2;
 int moveto_x3, moveto_y3;
+
 //2Pの現在地
 int moveto2_x, moveto2_y;
 int moveto2_x2, moveto2_y2;

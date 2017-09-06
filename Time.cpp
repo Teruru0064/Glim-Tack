@@ -24,7 +24,7 @@ void Time_Init(void){
 	End_gh = LoadGraph("game_img\\end.png");
 
 	//ƒQ[ƒ€‚Ì§ŒÀŠÔ
-	GameTime = 30 * 60;
+	GameTime = 5 * 60;
 	GameTime_Minute = 0;
 	text_x = 1280;
 }
