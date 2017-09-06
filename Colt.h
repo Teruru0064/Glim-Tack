@@ -27,14 +27,14 @@ struct Coltgame_obj{
 	enum State { Idle, Jump, Fall, STOP };
 
 
-
+	
 	int mapx, mapy;
 
 	int AnimStart;
 	int AnimEnd;
 	int AnimSpeed;
 
-
+	int little;
 };
 
 

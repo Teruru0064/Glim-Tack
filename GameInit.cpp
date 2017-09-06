@@ -23,6 +23,7 @@
 	SetMouseDispFlag(FALSE);
 
 	Controller_Init();
+	Title_init();
 	//colt‰Šú‰»
 	Colt1_init();
 	

@@ -13,6 +13,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//ゲーム初期化処理
 	game_init();
 
+
 	//メインループ
 	while (game_status!=GAMEEND)
 	{

@@ -48,6 +48,7 @@ void CharaSelect(void){
 		if (key_enter == 0){
 			game_status = GAMEMAIN;
 			Board_init();
+			Test_init();
 
 			key_enter = 1;
 		}

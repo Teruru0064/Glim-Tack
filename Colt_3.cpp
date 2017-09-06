@@ -92,11 +92,11 @@ void Colt3_Update(void){
 	}*/
 
 
-	if (mapdata[MapMaxX - 1][MapMaxY - 1] = 1){
+	if (mapdata[MapMaxX - 1][MapMaxY - 1] == 1){
 		colt3_1[0].active = 1;
 	}
 
-	if (mapdata[0][0] = 1){
+	if (mapdata[0][0] == 1){
 		colt3_2[0].active = 1;
 
 	}

@@ -19,7 +19,8 @@ extern int InputState1, InputState2;
 extern int sumscore_1p;		//プレイヤー１スコア
 extern int sumscore_2p;		//プレイヤー２スコア
 
-extern int White;
+//プレイヤーカラー(01は1P、02は2P)
+int color_01,color_02;
 
 
 //キャラクターのグラフィックハンドル
@@ -90,6 +91,12 @@ void Score_Init(void){
 	Rap03_gh = LoadGraph("score_img\\Rapunzel_Score02.png");
 	*/
 	
+
+	color_01 = GetColor(245, 57, 77);	//赤色
+	color_02 = GetColor(45, 135, 246);	//青色
+
+
+
 	//初期化グラフ
 	score_init_flag = 1;
 }
@@ -101,7 +108,7 @@ void Score_Delete(void){
 	DeleteGraph(score_BG_gh);
 	DeleteGraph(vs_gh);
 	DeleteGraph(button_gh[0]);
-	DeleteGraph(button_gh[2]);
+	DeleteGraph(button_gh[1]);
 	DeleteGraph(win_gh);
 	DeleteGraph(lose_gh);
 	DeleteGraph(draw_gh);
@@ -214,23 +221,23 @@ void Score_Draw(void){
 
 	//３ケタの数字を１秒間ランダムに表示させる
 	if (GetNowCount() - ScoreStart < 1000){
-		DrawFormatString(400, 320, White, "%03d", GetRand(999));
-		DrawFormatString(710, 320, White, "%03d", GetRand(999));
+		DrawFormatString(400, 320, color_01, "%03d", GetRand(999));
+		DrawFormatString(710, 320, color_02, "%03d", GetRand(999));
 	}
 	//１ケタ目数字を1秒後に表示させる
 	else if (GetNowCount() - ScoreStart < 2000){
-		DrawFormatString(400, 320, White, "%03d", GetRand(99) * 10 + sumscore_1p % 10);
-		DrawFormatString(710, 320, White, "%03d", GetRand(99) * 10 + sumscore_2p % 10);
+		DrawFormatString(400, 320, color_01, "%03d", GetRand(99) * 10 + sumscore_1p % 10);
+		DrawFormatString(710, 320, color_02, "%03d", GetRand(99) * 10 + sumscore_2p % 10);
 	}
 	//２ケタ目数字を2秒後に表示させる
 	else if (GetNowCount() - ScoreStart < 3000){
-		DrawFormatString(400, 320, White, "%03d", GetRand(9) * 100 + sumscore_1p % 100);
-		DrawFormatString(710, 320, White, "%03d", GetRand(9) * 100 + sumscore_2p % 100);
+		DrawFormatString(400, 320, color_01, "%03d", GetRand(9) * 100 + sumscore_1p % 100);
+		DrawFormatString(710, 320, color_02, "%03d", GetRand(9) * 100 + sumscore_2p % 100);
 	}
 	else{
 		//1Pと2Pのスコア全表示
-		DrawFormatString(400, 320, White, "%03d", sumscore_1p);
-		DrawFormatString(710, 320, White, "%03d", sumscore_2p);
+		DrawFormatString(400, 320, color_01, "%03d", sumscore_1p);
+		DrawFormatString(710, 320, color_02, "%03d", sumscore_2p);
 	}
 
 	//スコア画面にシーン切り替えして6秒後にボタンの表示
@@ -245,6 +252,8 @@ void Score_Draw(void){
 				game_status = TITLE;
 				ScoreChara_Delete();
 				key_enter = 1;
+				Test_init();
+				//Title_init();
 			}
 		}
 		else{

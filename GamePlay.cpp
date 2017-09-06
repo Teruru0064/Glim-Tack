@@ -13,10 +13,8 @@ extern int key_enter;
 //ƒ^ƒCƒgƒ‹‚ğÄ¶‚·‚é
 void Title_set(void){
 
-	Test_init();
-	Title_init();
 	Title();
-	Title_delete();
+	//Title_delete();
 	GetControllerState();
 
 }

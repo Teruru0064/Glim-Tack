@@ -17,6 +17,7 @@ int homespot[5];
 int paint[5];
 
 int mapdata[MapMaxX][MapMaxY];//描画用マップ
+
 int mapdata2[MapMaxX][MapMaxY];//光る赤用
 int mapdata3[MapMaxX][MapMaxY];//消す赤用
 int mapdata4[MapMaxX][MapMaxY];//光る青用
@@ -54,16 +55,13 @@ void Board_init(void){
 	Board_X = 256;
 	Board_Y = 128;
 
-
-}
-
-void Board_draw(void){
-
 	//１ｐの初期位置
 	mapdata[0][MapMaxY - 1] = 100;
 	//２ｐの初期位置
 	mapdata[MapMaxX - 1][0] = 200;
+}
 
+void Board_draw(void){
 
 	//色の表示
 	for (int i = 0; i < MapMaxX; i++){

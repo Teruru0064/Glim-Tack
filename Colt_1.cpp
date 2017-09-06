@@ -24,7 +24,7 @@ void Colt1_init(void){
 
 	for (int i = 0; i < 3; i++){
 		//コマ①のキャラチップの読み込み
-		LoadDivGraph("colt_img\\Colt1_1p.png", 12, 3, 4, 64, 63, colt1[i].anime_gh);
+		LoadDivGraph("colt_img\\Colt1_1p.png", 12, 3, 4, 64, 64, colt1[i].anime_gh);
 		LoadDivGraph("colt_img\\Colt1_2p.png", 12, 3, 4, 64, 63, colt1_2[i].anime_gh);
 		//PC幅、高さ
 		colt1[i].width = 64;
@@ -92,11 +92,11 @@ void Colt1_Update(void){
 	}*/
 
 
-	if (mapdata[MapMaxX - 1][MapMaxY - 1] = 1){
+	if (mapdata[MapMaxX - 1][MapMaxY - 1] == 1){
 		colt1[0].active = 1;
 	}
 
-	if (mapdata[0][0] = 1){
+	if (mapdata[0][0] == 1){
 		colt1_2[0].active = 1;
 
 	}
