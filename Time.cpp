@@ -33,7 +33,7 @@ void Time_Update(void){
 
 	//ゲーム起動中は時間を減少させる
 	//ゲーム終了
-	if (!menu_flg && !(GameTime_Minute == 0 && GameTime==0))GameTime--;
+	//if (!menu_flg && !(GameTime_Minute == 0 && GameTime==0))GameTime--;
 
 	if (GameTime == 0 && GameTime_Minute == 0) {
 

@@ -13,7 +13,7 @@ struct Coltgame_obj colt1[3],colt1_2[3];
 
 int AnimeCounter;
 
-int move_x[3] = { 0, 0, 0 }, move_y[3] = { 0, 0, 0 };
+int move_x[3] = { 0, 0, 0 },move_y[3] = { 0, 0, 0 };
 
 int move_x02[3] = { 0, 0, 0 }, move_y02[3] = { 0, 0, 0 };
 
@@ -128,6 +128,10 @@ void Colt1_Draw(void){
 				(colt1[i].mapy) * MAP_SIZE + Board_Y + move_y[i], colt1[i].anime_gh[colt1[i].CurFrame], TRUE);
 
 			DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", colt1[i].CurFrame);
+
+			DrawFormatString(0, 50, GetColor(255, 255, 255), "%d.%d", colt1[0].mapx, colt1[0].mapy);
+			DrawFormatString(0, 80, GetColor(255, 255, 255), "%d.%d", move_x[0], move_y[0]);
+
 			// AnimeCounter++;
 
 			colt1[i].CurFrame = AnimeCounter / colt1[i].AnimSpeed % colt1[i].AnimFrameNum + colt1[i].AnimStart;
@@ -168,9 +172,10 @@ void Colt1_move1p_down(void){
 		if (move_y[i] % MAP_SIZE == 0) {
 			colt1[i].AnimStart = 0;
 			colt1[i].AnimEnd = 2;
+			move_x[i] = 0;
 			move_y[i] = 0;
 			
-				colt1[i].mapy++;
+			colt1[i].mapy++;
 			
 
 		}
@@ -209,8 +214,9 @@ void Colt1_move1p_left(void){
 			colt1[i].AnimStart = 3;
 			colt1[i].AnimEnd = 5;
 			move_x[i] = 0;
+			move_y[i] = 0;
 			
-				colt1[i].mapx--;
+			--colt1[i].mapx;
 			
 		}
 	}
@@ -246,8 +252,9 @@ void Colt1_move1p_right(void){
 			colt1[i].AnimStart = 6;
 			colt1[i].AnimEnd = 8;
 			move_x[i] = 0;
+			move_y[i] = 0;
 			
-				colt1[i].mapx++;
+			colt1[i].mapx++;
 			
 		}
 	}
@@ -282,9 +289,10 @@ void Colt1_move1p_up(void){
 		if (move_y[i] % MAP_SIZE == 0) {
 			colt1[i].AnimStart = 9;
 			colt1[i].AnimEnd = 11;
+			move_x[i] = 0;
 			move_y[i] = 0;
 			
-				colt1[i].mapy--;
+				--colt1[i].mapy;
 			
 
 		}
@@ -462,3 +470,19 @@ void Colt1_move2p_up(void){
 	}
 }
 
+//moveïœêîÇèâä˙âªÇµÇ‹Ç∑ÅB
+void MoveCount1PInit(){
+	//à⁄ìÆíÜÇÕñ≥å¯âªÇ∑ÇÈ
+	for (int i = 0; i < 3; i++){
+		move_x[i] = 0;
+		move_y[i] = 0;
+	}
+}
+
+void MoveCount2PInit(){
+	//à⁄ìÆíÜÇÕñ≥å¯âªÇ∑ÇÈ
+	for (int i = 0; i < 3; i++){
+		move_x02[i] = 0;
+		move_y02[i] = 0;
+	}
+}

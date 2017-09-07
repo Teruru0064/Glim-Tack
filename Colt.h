@@ -50,6 +50,8 @@ void Colt1_move2p_down(void);
 void Colt1_move2p_left(void);
 void Colt1_move2p_right(void);
 void Colt1_move2p_up(void);
+void MoveCount1PInit();
+void MoveCount2PInit();
 ////////////////////////////////////////////
 
 ////////////////ƒRƒ}‡A//////////////////////

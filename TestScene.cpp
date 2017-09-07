@@ -105,6 +105,7 @@ int mouseX2, mouseY2;
 int colt_1p_mapX, colt_1p_mapY;
 int colt_2p_mapX, colt_2p_mapY;
 
+//
 int mapX11, mapY11;//兵士1の1兵士行くべき場所
 int mapX12, mapY12;//兵士1の2
 int mapX13, mapY13;//兵士1の3
@@ -158,6 +159,16 @@ extern int P1_x, P1_y, P2_x, P2_y;
 
 int t = 0;
 int now_mapx, now_mapy;
+
+//コマの状態
+enum ColtSelect{
+	COLT_1P_SOLDIER_NORMAL= 1,	//ノーマルタイプ
+	COLT_1P_SOLDIER_COATING,	//塗るタイプ
+	COLT_1P_SOLDIER_ROB,		//相手の陣地を奪う
+	COLT_1P_SOLDIER_NULL	//番兵
+};
+
+//マスの状態
 
 
 //初期化処理
@@ -236,7 +247,7 @@ void RedFlag12(int mapX, int mapY){
 void RedFlag13(int mapX, int mapY){
 	if (RedTimeFlag13 == 0){
 		mapdata[mapX13][mapY13] = 1;
-		//testselect = 0;
+		//testselect = 0
 	}
 }
 
@@ -1082,7 +1093,7 @@ void TestScene(void){
 	////２ｐの初期位置
 	//mapdata[MapMaxX - 1][MapMaxY - 1] = 200;
 
-
+	//-------------------1P-------------------------------------------------------
 	GetJoypadXInputState(DX_INPUT_PAD1, &XInputState1);
 
 	//1pのボタン振り分け
@@ -1099,18 +1110,20 @@ void TestScene(void){
 
 	//マウスの位置をマップのどこに押したか判定する
 	if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0 || XInputState1.Buttons[13]){
+		
 		//マウスの位置からマップ座標を計算し、代入
 		int mapX = (mouseX - Board_X) / 64;
 		int mapY = (mouseY - Board_Y) / 64;
 		//兵士選択
 		if (mapX == 11 && mapY == 0){
-			colt_select_1p = 1;
+			colt_select_1p = ColtSelect::COLT_1P_SOLDIER_NORMAL;
+		
 		}
 		if (mapX == 11 && mapY == 1){
-			colt_select_1p = 2;
+			colt_select_1p = ColtSelect::COLT_1P_SOLDIER_COATING;
 		}
 		if (mapX == 11 && mapY == 2){
-			colt_select_1p = 3;
+			colt_select_1p = ColtSelect::COLT_1P_SOLDIER_ROB;
 		}
 
 		//光る場所の初期化(塗る用)
@@ -1130,7 +1143,7 @@ void TestScene(void){
 			}
 		}
 		//裏描画の初期化(消す用)
-		if ((colt_select_1p != 2)){
+		if ((colt_select_1p != ColtSelect::COLT_1P_SOLDIER_COATING)){
 			for (int i = 0; i < MapMaxX; i++){
 				for (int j = 0; j < MapMaxY; j++){
 					mapdata6[i][j] = 0;
@@ -1176,6 +1189,8 @@ void TestScene(void){
 
 					now_mapx = mapX; now_mapy = mapY;
 					TestFirstRed(mapX, mapY);
+					//TODO:強制的に移動変数を初期化
+					MoveCount1PInit();
 				}
 
 			}
@@ -1197,6 +1212,8 @@ void TestScene(void){
 		}
 	}
 
+
+	//-------------------2P-------------------------------------------------------
 	GetJoypadXInputState(DX_INPUT_PAD2, &XInputState2);
 
 	//２pのボタン振り分け
@@ -1209,6 +1226,7 @@ void TestScene(void){
 	if (XInputState2.Buttons[12]){
 		colt_select_2p = 13;
 	}
+
 	//マウスの位置をマップのどこに押したか判定する
 	if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0 || XInputState2.Buttons[13]){
 		//マウスの位置からマップ座標を計算し、代入
@@ -1283,6 +1301,8 @@ void TestScene(void){
 			if ((mapdata[mapX][mapY] == 2) || (mapdata[mapX][mapY] == 200)){
 				if (colt_select_2p == 11){
 					TestFirstBlue(mapX, mapY);
+					//TODO:強制的に移動変数を初期化
+					MoveCount2PInit();
 				}
 			}
 			if (colt_select_2p == 14){
@@ -1335,7 +1355,7 @@ void TestScene(void){
 				if (colt_select_1p == 4 || colt_select_1p == 5)
 					//ここでコマの画像を表示させる場合
 
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[1], true);
+					DrawGraph((i * MAP_SIZE) + Board_X, (j * MAP_SIZE) + Board_Y, spotlight[1], true);
 				break;
 			}
 		}
@@ -1347,7 +1367,7 @@ void TestScene(void){
 			switch (mapdata3[i][j]){
 			case 1:
 				if (colt_select_1p == 5)
-					DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, spotlight[1], true);
+					DrawGraph((i * MAP_SIZE) + Board_X, (j * MAP_SIZE) + Board_Y, spotlight[1], true);
 				break;
 			}
 		}
@@ -1420,7 +1440,7 @@ void TestScene(void){
 					else if (colt1[t].mapy > moveto_y2){
 						Colt1_move1p_up();
 					}
-				}
+			}
 				break;
 			}
 		}

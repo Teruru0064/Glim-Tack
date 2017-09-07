@@ -5,16 +5,26 @@
 #include "Game_Info.h"
 #include "Colt.h"
 
-int Board_X, Board_Y;
+int Board_X, Board_Y;		//ボードの表示位置(X:256,Y128px)
 int img_board;
 
 //拠点マス
 //0=ダミー,1=赤ずきん,2=白雪姫,3=ヘングレ,4=ラプンツェル
+#define HOMESPOT_REDFOOD 100
+#define HOMESPOT_SNOWWHITE 200
 int homespot[5];
 
 //自マスデザイン
 //0=ボード(空白マス),1=赤ずきん,2=白雪姫,3=ヘングレ,4=ラプンツェル
-int paint[5];
+enum PaintBoardNo{
+	PAINTBPARD_NULL,		//0何も無い状態
+	PAINTBPARD_REDFOOD,		//1赤ずきん
+	PAINTBPARD_SNOWWHITE,	//2白雪姫
+	PAINTBPARD_HOMESPOT_3,	//3ヘングレ
+	PAINTBPARD_4,			//4ラプンチェル
+	PAINTBPARD_MAX		//5コマ最大数
+};
+int paint[PAINTBPARD_MAX];
 
 int mapdata[MapMaxX][MapMaxY];//描画用マップ
 
@@ -56,9 +66,9 @@ void Board_init(void){
 	Board_Y = 128;
 
 	//１ｐの初期位置
-	mapdata[0][MapMaxY - 1] = 100;
+	mapdata[0][MapMaxY - 1] = HOMESPOT_REDFOOD;
 	//２ｐの初期位置
-	mapdata[MapMaxX - 1][0] = 200;
+	mapdata[MapMaxX - 1][0] = HOMESPOT_SNOWWHITE;
 }
 
 void Board_draw(void){
@@ -67,21 +77,21 @@ void Board_draw(void){
 	for (int i = 0; i < MapMaxX; i++){
 		for (int j = 0; j < MapMaxY; j++){
 			switch (mapdata[i][j]){
-			case 0:
+			case PAINTBPARD_NULL:
 				//ボードの表示
-				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, paint[0], true);
+				DrawGraph((i * MAP_SIZE) + Board_X, (j * MAP_SIZE) + Board_Y, paint[PAINTBPARD_NULL], true);
 				break;
-			case 1:
-				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, paint[1], true);
+			case PAINTBPARD_REDFOOD:
+				DrawGraph((i * MAP_SIZE) + Board_X, (j * MAP_SIZE) + Board_Y, paint[PAINTBPARD_REDFOOD], true);
 				break;
-			case 2:
-				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, paint[2], true);
+			case PAINTBPARD_SNOWWHITE:
+				DrawGraph((i * MAP_SIZE) + Board_X, (j * MAP_SIZE) + Board_Y, paint[PAINTBPARD_SNOWWHITE], true);
 				break;
-			case 100:
-				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, homespot[1], true);
+			case HOMESPOT_REDFOOD:
+				DrawGraph((i * MAP_SIZE) + Board_X, (j * MAP_SIZE) + Board_Y, homespot[1], true);
 				break;
-			case 200:
-				DrawGraph((i * 64) + Board_X, (j * 64) + Board_Y, homespot[2], true);
+			case HOMESPOT_SNOWWHITE:
+				DrawGraph((i * MAP_SIZE) + Board_X, (j * MAP_SIZE) + Board_Y, homespot[2], true);
 				break;
 			}
 		}
