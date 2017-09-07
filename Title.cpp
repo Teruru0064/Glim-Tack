@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "GameStatus.h"
-#include "Player.h"
+#include "CharaSelect.h"
 #include "Controller.h"
 #include "Game_Info.h"
 
@@ -16,7 +16,7 @@ extern int InputState1, InputState2;
 int Ratten_gh[2];
 
 //リトル関数
-int little[12];
+int little[16];
 
 //リトルのキャラチップの段数(01は1段目、02は2段目、03は3段目、04は4段目)
 int LittleX_01, LittleX_02, LittleX_03, LittleX_04;
@@ -79,7 +79,7 @@ void Title_init(void){
 
 
 	//リトルのキャラチップの読み込み
-	LoadDivGraph("title_img\\Little.png", 12, 3, 4, 160, 160, little);
+	LoadDivGraph("title_img\\Little.png", 16, 4, 4, 160, 160, little);
 	//リトルの初期座標
 	LittleX_01 = 1350;
 	LittleX_02 = 1650;
@@ -91,8 +91,8 @@ void Title_init(void){
 	cloud02_X = 1850;
 	
 	//矢印の座標
-	ArrowSign_X = 800;
-	ArrowSign_Y = 260;
+	ArrowSign_X = 810;
+	ArrowSign_Y = 267;
 
 	ChangeFontType(DX_FONTTYPE_ANTIALIASING_EDGE_8X8);
 	title_init_flag = 1;
@@ -163,6 +163,7 @@ void Title(void){
 			switch (selected){
 			case 0:
 				game_status = CHARASELECT;
+				CharaSelect_init();
 				break;
 			case 1:
 				///game_status = GAMEEND;
@@ -214,19 +215,19 @@ void Title(void){
 
 
 	//妖精のアニメーション設定
-	DrawGraph(LittleX_01, 500, little[GetNowCount() / 700 % 3], TRUE);
-	DrawGraph(LittleX_02, 500, little[((GetNowCount() / 700) + 1) % 3 + 3], TRUE);
-	DrawGraph(LittleX_03, 500, little[((GetNowCount() / 700) + 2) % 3 + 6], TRUE);
-	DrawGraph(LittleX_04, 500, little[((GetNowCount() / 700) + 3) % 3 + 9], TRUE);
+	DrawGraph(LittleX_01, 500, little[GetNowCount() / 700 % 4], TRUE);
+	DrawGraph(LittleX_02, 500, little[((GetNowCount() / 700) + 1) % 4 + 4], TRUE);
+	DrawGraph(LittleX_03, 500, little[((GetNowCount() / 700) + 2) % 4 + 8], TRUE);
+	DrawGraph(LittleX_04, 500, little[((GetNowCount() / 700) + 3) % 4 + 12], TRUE);
 
 	//リトルの動く速さと再描画位置
-	LittleX_01 -= 3;
+	LittleX_01 -= 2;
 	if (LittleX_01 < 0)LittleX_01 = 1300;
-	LittleX_02 -= 3;
+	LittleX_02 -= 2;
 	if (LittleX_02 < 0)LittleX_02 = 1300;
-	LittleX_03 -= 3;
+	LittleX_03 -= 2;
 	if (LittleX_03 < 0)LittleX_03 = 1300;
-	LittleX_04 -= 3;
+	LittleX_04 -= 2;
 	if (LittleX_04 < 0)LittleX_04 = 1300;
 
 	//背景の洞窟描画

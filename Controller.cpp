@@ -13,7 +13,7 @@ int InputState1, InputState2;
 XINPUT_STATE XInputState1, XInputState2;
 DINPUT_JOYSTATE DInputState;
 int cur_gh[2];
-int P1_x = 100, P1_y = 0, P2_x = 600, P2_y = 0;
+int P1_x = 200, P1_y = 650, P2_x = 1040, P2_y = 140;
 int cur_speed = 5;
 extern int game_status;
 
@@ -89,10 +89,10 @@ void GetControllerState(){
 		P1_x += cur_speed;
 	}
 
-	if (XInputState1.Buttons[4]){
+	/*if (XInputState1.Buttons[4]){
 		game_status = GAMEMAIN;
 		Board_init();
-	}
+	}*/
 
 	///////////////////////////
 	///コントローラー2の処理///
@@ -132,62 +132,62 @@ void GetControllerState(){
 	if (XInputState2.Buttons[3]){
 		P2_x += cur_speed;
 	}
-	if (XInputState2.Buttons[4]){
+	/*if (XInputState2.Buttons[4]){
 		game_status = GAMEMAIN;
 		Board_init();
-	}
+	}*/
 
 }
 
 void DispControllerState(){
 
 
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "PadNum=%d", PadNum);
+	//DrawFormatString(0, 0, GetColor(255, 255, 255), "PadNum=%d", PadNum);
 	//DrawFormatString(0, 50, GetColor(255, 255, 255), "InputState=%d", InputState);
 
 	//XInput
-	for (int i = 0; i < 16; i++){
-		DrawFormatString(0 + i * 70, 30, GetColor(255, 255, 255), "[%2d]", i);
-		DrawFormatString(25 + i * 70, 60, GetColor(255, 255, 255), "%d", XInputState1.Buttons[i]);
-
-	}
-	for (int i = 0; i < 16; i++){
-		DrawFormatString(0 + i * 70, 90, GetColor(255, 255, 255), "[%2d]", i);
-		DrawFormatString(25 + i * 70, 120, GetColor(255, 255, 255), "%d", XInputState2.Buttons[i]);
-
-	}
-
-	DrawFormatString(0, 160, GetColor(255, 255, 255), "LeftTrigger=%d", XInputState1.LeftTrigger);
-	DrawFormatString(300, 160, GetColor(255, 255, 255), "RightTrigger=%d", XInputState1.RightTrigger);
-
-	DrawFormatString(0, 200, GetColor(255, 255, 255), "ThumbLX=%d", XInputState1.ThumbLX);
-	DrawFormatString(300, 200, GetColor(255, 255, 255), "ThumbLY=%d", XInputState1.ThumbLY);
-
-	DrawFormatString(0, 240, GetColor(255, 255, 255), "ThumbRX=%d", XInputState1.ThumbRX);
-	DrawFormatString(300, 240, GetColor(255, 255, 255), "ThumbRY=%d", XInputState1.ThumbRY);
-
-
-
-	//DirectInput
-	for (int i = 0; i < 16; i++){
-		DrawFormatString(0 + i * 70, 300 + 30, GetColor(255, 255, 255), "[%2d]", i);
-		DrawFormatString(25 + i * 70, 300 + 60, GetColor(255, 255, 255), "%d", DInputState.Buttons[i]);
-
-	}
-	for (int i = 16; i <32; i++){
-		DrawFormatString(0 + (i - 16) * 70, 300 + 90, GetColor(255, 255, 255), "[%2d]", i);
-		DrawFormatString(25 + (i - 16) * 70, 300 + 120, GetColor(255, 255, 255), "%d", DInputState.Buttons[i]);
-
-	}
-
-
-	DrawFormatString(0, 470, GetColor(255, 255, 255), " POV[0]= %d  ", DInputState.POV[0]);
-	DrawFormatString(0, 500, GetColor(255, 255, 255), " X= %d  ", DInputState.X);
-	DrawFormatString(0, 530, GetColor(255, 255, 255), " Y= %d  ", DInputState.Y);
-
-
+	//	for (int i = 0; i < 16; i++){
+	//		DrawFormatString(0 + i * 70, 30, GetColor(255, 255, 255), "[%2d]", i);
+	//		DrawFormatString(25 + i * 70, 60, GetColor(255, 255, 255), "%d", XInputState1.Buttons[i]);
+	//
+	//	}
+	//	for (int i = 0; i < 16; i++){
+	//		DrawFormatString(0 + i * 70, 90, GetColor(255, 255, 255), "[%2d]", i);
+	//		DrawFormatString(25 + i * 70, 120, GetColor(255, 255, 255), "%d", XInputState2.Buttons[i]);
+	//
+	//	}
+	//
+	//	DrawFormatString(0, 160, GetColor(255, 255, 255), "LeftTrigger=%d", XInputState1.LeftTrigger);
+	//	DrawFormatString(300, 160, GetColor(255, 255, 255), "RightTrigger=%d", XInputState1.RightTrigger);
+	//
+	//	DrawFormatString(0, 200, GetColor(255, 255, 255), "ThumbLX=%d", XInputState1.ThumbLX);
+	//	DrawFormatString(300, 200, GetColor(255, 255, 255), "ThumbLY=%d", XInputState1.ThumbLY);
+	//
+	//	DrawFormatString(0, 240, GetColor(255, 255, 255), "ThumbRX=%d", XInputState1.ThumbRX);
+	//	DrawFormatString(300, 240, GetColor(255, 255, 255), "ThumbRY=%d", XInputState1.ThumbRY);
+	//
+	//
+	//
+	//	//DirectInput
+	//	for (int i = 0; i < 16; i++){
+	//		DrawFormatString(0 + i * 70, 300 + 30, GetColor(255, 255, 255), "[%2d]", i);
+	//		DrawFormatString(25 + i * 70, 300 + 60, GetColor(255, 255, 255), "%d", DInputState.Buttons[i]);
+	//
+	//	}
+	//	for (int i = 16; i <32; i++){
+	//		DrawFormatString(0 + (i - 16) * 70, 300 + 90, GetColor(255, 255, 255), "[%2d]", i);
+	//		DrawFormatString(25 + (i - 16) * 70, 300 + 120, GetColor(255, 255, 255), "%d", DInputState.Buttons[i]);
+	//
+	//	}
+	//
+	//
+	//	DrawFormatString(0, 470, GetColor(255, 255, 255), " POV[0]= %d  ", DInputState.POV[0]);
+	//	DrawFormatString(0, 500, GetColor(255, 255, 255), " X= %d  ", DInputState.X);
+	//	DrawFormatString(0, 530, GetColor(255, 255, 255), " Y= %d  ", DInputState.Y);
+	//
+	//
+	//}
 }
-
 void DispCursol(){
 	//カーソルの表示
 	DrawGraph(P1_x, P1_y, cur_gh[0], TRUE);

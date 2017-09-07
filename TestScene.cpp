@@ -37,8 +37,12 @@ int moveto2_x3, moveto2_y3;
 
 //背景
 int img_BG;
-int img_BG_02;
 int img_book;
+int lvy_gh;
+
+//各キャラの旗の関数
+int LRRHFlag_gh;
+int SWFlag_gh;
 
 
 int Test_init_flag = 0;
@@ -164,9 +168,12 @@ void Test_init(void){
 	RedHood = LoadGraph("char_img/LittleRedRidingHood.png");
 	SnowWhite = LoadGraph("char_img/SnowWhite.png");
 
+
 	img_BG = LoadGraph("bg_img/BG.png");
-	img_BG_02 = LoadGraph("bg_img/BG_02.png");
+	lvy_gh = LoadGraph("bg_img/lvy.png");
 	img_book = LoadGraph("bg_img/book00.png");
+	LRRHFlag_gh = LoadGraph("bg_img/LRRH_Flag.png");
+	SWFlag_gh = LoadGraph("bg_img/SW_Flag.png");
 
 	ArrivalPoint_1p_1x = 0;
 	ArrivalPoint_1p_1y = 0;
@@ -963,7 +970,10 @@ void TestScene(void){
 	DrawGraph(0, 0, img_BG, TRUE);
 	DrawGraph(15, 620, img_book, TRUE);
 	DrawGraph(1035, 620, img_book, TRUE);
-	DrawGraph(0, 0, img_BG_02, TRUE);
+	DrawGraph(0, 0, lvy_gh, TRUE);
+
+	DrawTurnGraph(0, 0, LRRHFlag_gh, TRUE);
+	DrawTurnGraph(0, 0, SWFlag_gh, TRUE);
 
 	//キャラクター描画
 	//DrawGraph(1039, 370, RedHood, TRUE);

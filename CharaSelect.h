@@ -1,3 +1,3 @@
 void CharaSelect_init();
 void CharaSelect_delete();
-void CharaSelect();
+void CharaSelect_Draw();

@@ -22,8 +22,8 @@ void Title_set(void){
 //キャラクターシーンを再生する
 void CharaSelect_set(void){
 
-	CharaSelect_init();
-	CharaSelect();
+	
+	CharaSelect_Draw();
 	GetControllerState();
 	DispControllerState();
 	DispCursol();
