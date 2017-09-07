@@ -37,7 +37,7 @@ void CharaSelect_init(void){
 	score_init_flag = 1;
 
 	Redy_flag_1p = 0;
-	Redy_flag_2p = 0;
+	Redy_flag_2p = 1;
 	key_enter2 = 0;
 }
 

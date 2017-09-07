@@ -16,10 +16,10 @@ extern int InputState1, InputState2;
 int Ratten_gh[2];
 
 //リトル関数
-int little[16];
+int little[24];
 
-//リトルのキャラチップの段数(01は1段目、02は2段目、03は3段目、04は4段目)
-int LittleX_01, LittleX_02, LittleX_03, LittleX_04;
+//リトルのキャラチップの段数(01は1段目、02は2段目、03は3段目、04は4段目、05は5段目、06は6段目)
+int LittleX_01, LittleX_02, LittleX_03, LittleX_04, LittleX_05, LittleX_06;
 
 //タイトルバックグラウンド(01は風景、02は洞窟の区切り)
 int title01_gh, title02_gh;
@@ -79,12 +79,14 @@ void Title_init(void){
 
 
 	//リトルのキャラチップの読み込み
-	LoadDivGraph("title_img\\Little.png", 16, 4, 4, 160, 160, little);
+	LoadDivGraph("title_img\\Little.png", 24, 4, 6, 160, 160, little);
 	//リトルの初期座標
 	LittleX_01 = 1350;
 	LittleX_02 = 1650;
 	LittleX_03 = 1950;
 	LittleX_04 = 2250;
+	LittleX_05 = 2550;
+	LittleX_06 = 2850;
 
 	//雲のX座標(01は一枚目、02は二枚目)
 	cloud01_X = 0;
@@ -219,16 +221,22 @@ void Title(void){
 	DrawGraph(LittleX_02, 500, little[((GetNowCount() / 700) + 1) % 4 + 4], TRUE);
 	DrawGraph(LittleX_03, 500, little[((GetNowCount() / 700) + 2) % 4 + 8], TRUE);
 	DrawGraph(LittleX_04, 500, little[((GetNowCount() / 700) + 3) % 4 + 12], TRUE);
+	DrawGraph(LittleX_05, 500, little[((GetNowCount() / 700) + 4) % 4 + 16], TRUE);
+	DrawGraph(LittleX_06, 500, little[((GetNowCount() / 700) + 5) % 4 + 20], TRUE);
 
 	//リトルの動く速さと再描画位置
 	LittleX_01 -= 2;
-	if (LittleX_01 < 0)LittleX_01 = 1300;
+	if (LittleX_01 < 0)LittleX_01 = 1950;
 	LittleX_02 -= 2;
-	if (LittleX_02 < 0)LittleX_02 = 1300;
+	if (LittleX_02 < 0)LittleX_02 = 1950;
 	LittleX_03 -= 2;
-	if (LittleX_03 < 0)LittleX_03 = 1300;
+	if (LittleX_03 < 0)LittleX_03 = 1950;
 	LittleX_04 -= 2;
-	if (LittleX_04 < 0)LittleX_04 = 1300;
+	if (LittleX_04 < 0)LittleX_04 = 1950;
+	LittleX_05 -= 2;
+	if (LittleX_05 < 0)LittleX_05 = 1950;
+	LittleX_06 -= 2;
+	if (LittleX_06 < 0)LittleX_06 = 1950;
 
 	//背景の洞窟描画
 	DrawGraph(coordinates, coordinates, title02_gh, TRUE);
