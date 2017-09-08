@@ -7,9 +7,12 @@
 int selectBG_gh;
 
 //赤ずきん
-int LRRHselect_gh;
+int LRRHselect_gh,LRRHdecide_gh;
 //白雪姫
-int SWselect_gh;
+int SWselect_gh,SWdecide_gh;
+
+//OKテキストの関数
+int OK_Text[2];
 
 extern char KeyBuf[];
 extern int key_enter;
@@ -30,19 +33,28 @@ extern int InputState1, InputState2;
 void CharaSelect_init(void){
 	//画像の読み込み
 	selectBG_gh = LoadGraph("select_img\\select_BG.png");
-	LRRHselect_gh = LoadGraph("char_img\\LittleRedRidingHood.png");
-	SWselect_gh = LoadGraph("char_img\\SnowWhite.png");
+	LRRHselect_gh = LoadGraph("select_img\\LRRH_select.png");
+	SWselect_gh = LoadGraph("select_img\\SW_select.png");
+	LRRHdecide_gh = LoadGraph("select_img\\LRRH_Decide.png");
+	SWdecide_gh = LoadGraph("select_img\\SW_Decide.png");
 	
+	//OKテキストの画像
+	OK_Text[0] = LoadGraph("select_img\\OK_Text1.png");
+	OK_Text[1] = LoadGraph("select_img\\OK_Text2.png");
+
 	//初期化グラフ
 	score_init_flag = 1;
 
 	Redy_flag_1p = 0;
-	Redy_flag_2p = 1;
+	Redy_flag_2p = 0;
 	key_enter2 = 0;
 }
 
 void ChaarSelect_delete(void){
-	//DeleteGraph(score_gh);
+
+	DeleteGraph(LRRHselect_gh);
+	DeleteGraph(SWselect_gh);
+
 }
 
 
@@ -61,11 +73,20 @@ void CharaSelect_Draw(void){
 	//背景描画
 	DrawGraph(0, 0, selectBG_gh, TRUE);
 	if (Redy_flag_1p){
-		DrawGraph(170, 200, LRRHselect_gh, TRUE);
+		DeleteGraph(LRRHselect_gh);
+		DrawGraph(0, 0, LRRHdecide_gh, TRUE);
 	}
 	if (Redy_flag_2p){
-		DrawGraph(800, 200, SWselect_gh, TRUE);
+		DeleteGraph(SWselect_gh);
+		DrawGraph(0, 0, SWdecide_gh, TRUE);
 	}
+
+	DrawGraph(0, 0, LRRHselect_gh, TRUE);
+	DrawGraph(0, 0, SWselect_gh, TRUE);
+
+
+	//OKテキストの表示
+	DrawGraph(0, 0, OK_Text[GetNowCount() / 1200 % 2], TRUE);
 
 	//Enterでタイトルへ
 	if (CheckHitKey(KEY_INPUT_RETURN) == 1 || XInputState1.Buttons[4]) {

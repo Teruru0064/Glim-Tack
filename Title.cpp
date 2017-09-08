@@ -126,6 +126,10 @@ void Title(void){
 		Title_init();
 	}
 
+	if (CheckSoundFile() == 0){
+		PlaySoundFile("sound\\Title.mp3", DX_PLAYTYPE_BACK);
+	}
+
 	//‹ó‚Ì•`‰æ
 	DrawGraph(coordinates, coordinates, sky_gh, TRUE);
 

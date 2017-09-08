@@ -26,7 +26,6 @@ void CharaSelect_set(void){
 	CharaSelect_Draw();
 	GetControllerState();
 	DispControllerState();
-	DispCursol();
 
 }
 

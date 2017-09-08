@@ -1,3 +1,5 @@
-﻿     ライブラリ C:\Users\Teruru\Documents\Glim-Tack\Debug\GameSystemSample.lib とオブジェクト C:\Users\Teruru\Documents\Glim-Tack\Debug\GameSystemSample.exp を作成中
-Player.obj : warning LNK4020: 'c:\users\teruru\documents\glim-tack\debug\vc120.pdb' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+﻿  Title.cpp
+  CharaSelect.cpp
+  コードを生成中...
+cl : コマンド ライン warning D9028: 簡易リビルド時のエラーです、通常のビルドに戻します
   0718授業用.vcxproj -> C:\Users\Teruru\Documents\Glim-Tack\Debug\GameSystemSample.exe
