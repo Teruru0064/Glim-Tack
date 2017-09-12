@@ -976,6 +976,8 @@ void TestScene(void){
 		Time_Init();
 		Test_init_flag = 1;	//初期化完了
 	}
+
+	
 	
 	//背景描画
 	DrawGraph(0, 0, img_BG, TRUE);

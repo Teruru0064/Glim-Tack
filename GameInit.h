@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "GameStatus.h"
 #include "Title.h"
+#include "Option.h"
 #include "CharaSelect.h"
 #include "GamePlay.h"
 #include "Time.h"

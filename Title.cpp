@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "GameStatus.h"
+#include "Option.h"
 #include "CharaSelect.h"
 #include "Controller.h"
 #include "Game_Info.h"
@@ -127,7 +128,7 @@ void Title(void){
 	}
 
 	if (CheckSoundFile() == 0){
-		PlaySoundFile("sound\\Title.mp3", DX_PLAYTYPE_BACK);
+		PlaySoundFile("sound\\Title.mp3", DX_PLAYTYPE_LOOP);
 	}
 
 	//‹ó‚Ì•`‰æ
@@ -169,10 +170,13 @@ void Title(void){
 			switch (selected){
 			case 0:
 				game_status = CHARASELECT;
+				// BGM‚ðŽ~‚ß‚é
+				StopSoundFile();
 				CharaSelect_init();
 				break;
 			case 1:
-				///game_status = GAMEEND;
+				game_status = OPTION;
+				Option_Init();
 				break;
 			case 2:
 				game_status = GAMEEND;

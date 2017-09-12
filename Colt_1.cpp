@@ -127,12 +127,12 @@ void Colt1_Draw(void){
 			DrawGraph((colt1[i].mapx) * MAP_SIZE + Board_X + move_x[i],
 				(colt1[i].mapy) * MAP_SIZE + Board_Y + move_y[i], colt1[i].anime_gh[colt1[i].CurFrame], TRUE);
 
-			DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", colt1[i].CurFrame);
+			//DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", colt1[i].CurFrame);
 
-			DrawFormatString(0, 50, GetColor(255, 255, 255), "%d.%d", colt1[0].mapx, colt1[0].mapy);
-			DrawFormatString(0, 80, GetColor(255, 255, 255), "%d.%d", move_x[0], move_y[0]);
+			//DrawFormatString(0, 50, GetColor(255, 255, 255), "%d.%d", colt1[0].mapx, colt1[0].mapy);
+			//DrawFormatString(0, 80, GetColor(255, 255, 255), "%d.%d", move_x[0], move_y[0]);
 
-			// AnimeCounter++;
+			//AnimeCounter++;
 
 			colt1[i].CurFrame = AnimeCounter / colt1[i].AnimSpeed % colt1[i].AnimFrameNum + colt1[i].AnimStart;
 		}
@@ -150,7 +150,7 @@ void Colt1_Draw(void){
 			DrawGraph((colt1_2[i].mapx) * MAP_SIZE + Board_X + move_x02[i],
 				(colt1_2[i].mapy) * MAP_SIZE + Board_Y + move_y02[i], colt1_2[i].anime_gh[colt1_2[i].CurFrame], TRUE);
 
-			DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", colt1_2[i].CurFrame);
+			//DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", colt1_2[i].CurFrame);
 			//if (!nonanim) AnimeCounter++;
 
 			colt1_2[i].CurFrame = AnimeCounter / colt1_2[i].AnimSpeed % colt1_2[i].AnimFrameNum + colt1_2[i].AnimStart;

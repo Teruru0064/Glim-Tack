@@ -20,12 +20,14 @@ extern int return_sh;
 extern int game_status;
 extern int GameTime;
 int key_enter2;
+
 //初期化フラグ
 static int score_init_flag = 0;
 
 //準備OKフラグ
 int Redy_flag_1p,Redy_flag_2p;
 int Count_Down = 180;
+
 //コントローラー1P・2Pのボタン振り分けするときに呼び出さないといけない関数
 extern XINPUT_STATE XInputState1, XInputState2;
 extern int InputState1, InputState2;
@@ -56,11 +58,6 @@ void ChaarSelect_delete(void){
 	DeleteGraph(SWselect_gh);
 
 }
-
-
-//1P・2Pのコントローラーの呼出し
-//GetJoypadDirectInputState(InputType1, &DInputState);
-//GetJoypadDirectInputState(InputType2, &DInputState);
 
 
 void CharaSelect_Draw(void){
@@ -96,11 +93,11 @@ void CharaSelect_Draw(void){
 
 			//2Pが準備OKではなかったら最初の音を鳴らす
 			if (!Redy_flag_2p){
-				
+				PlaySoundFile("sound\\Decide01.mp3", DX_PLAYTYPE_BACK);
 			}
 			//準備OKだったら後の音を鳴らす
 			else{
-
+				PlaySoundFile("sound\\Decide02.mp3", DX_PLAYTYPE_BACK);
 			}
 		}
 	}

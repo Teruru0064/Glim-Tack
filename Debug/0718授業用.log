@@ -1,5 +1,4 @@
-﻿  Title.cpp
-  CharaSelect.cpp
+﻿  Time.cpp
+  Score.cpp
   コードを生成中...
-cl : コマンド ライン warning D9028: 簡易リビルド時のエラーです、通常のビルドに戻します
   0718授業用.vcxproj -> C:\Users\Teruru\Documents\Glim-Tack\Debug\GameSystemSample.exe

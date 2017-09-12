@@ -24,8 +24,8 @@ void Time_Init(void){
 	End_gh = LoadGraph("game_img\\end.png");
 
 	//ƒQ[ƒ€‚Ì§ŒÀŠÔ
-	GameTime = 5 * 60;
-	GameTime_Minute = 0;
+	GameTime = 60 * 60;
+	GameTime_Minute = 1;
 	text_x = 1280;
 }
 
@@ -33,13 +33,16 @@ void Time_Update(void){
 
 	//ƒQ[ƒ€‹N“®’†‚ÍŠÔ‚ğŒ¸­‚³‚¹‚é
 	//ƒQ[ƒ€I—¹
-	//if (!menu_flg && !(GameTime_Minute == 0 && GameTime==0))GameTime--;
-
-	if (GameTime == 0 && GameTime_Minute == 0) {
-
+	if (!menu_flg && !(GameTime_Minute == 0 && GameTime==0))GameTime--;
+	if (CheckSoundFile() == 0){
+		PlaySoundFile("sound\\Main_BGM.mp3", DX_PLAYTYPE_BACK);
+	}
+	if (GameTime == 0 && GameTime_Minute == 0){
 		//game_status = SCORE;
 		//‚µ‚ã`‚è‚å`‚Ì•\¦
 		DrawGraph(text_x, 200, End_gh, TRUE);
+		// BGM‚ğ~‚ß‚é
+		//StopSoundFile();
 		text_x -= 12;
 		if (text_x < -1700) game_status = SCORE;
 			nonanim = 1;
@@ -50,14 +53,11 @@ void Time_Update(void){
 	}
 
 	if (GameTime <= 0 && GameTime_Minute!=0){
-		GameTime = 5 * 60;
+		GameTime = 60 * 60;
 		--GameTime_Minute;
 	}
 
 	//ƒQ[ƒ€ƒ^ƒCƒ€•\¦
 	DrawFormatString(545, 50, GetColor(255, 255, 255), "‚Ì‚±‚è %d:%02d", GameTime_Minute, GameTime / 60);
 
-
-	//‚µ‚ã`‚è‚å`‚Ì•\¦
-	//DrawGraph(0, 200, End_gh, TRUE);
 }

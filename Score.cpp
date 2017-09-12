@@ -186,9 +186,9 @@ void Score_Draw(void){
 		//1Pのスコアが2Pより低かったら1Pに「まけ」2Pに「かち」を表示
 		else if (sumscore_1p < sumscore_2p){
 			//負け
-			DrawGraph(TextX_2p, TextY, lose_gh, TRUE);
+			DrawGraph(TextX_1p, TextY, lose_gh, TRUE);
 			//勝ち
-			DrawGraph(TextX_1p, TextY, win_gh, TRUE);
+			DrawGraph(TextX_2p, TextY, win_gh, TRUE);
 			//勝敗結果が出て1秒後にキャラクターを表示
 			if (GetNowCount() - ScoreStart > 5000){
 				//待機中のキャラクターを削除

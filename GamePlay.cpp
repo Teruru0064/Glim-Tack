@@ -14,7 +14,14 @@ extern int key_enter;
 void Title_set(void){
 
 	Title();
-	//Title_delete();
+	GetControllerState();
+
+}
+
+//ƒIƒvƒVƒ‡ƒ“‚ğÄ¶‚·‚é
+void Option_set(void){
+
+	Option_Draw();
 	GetControllerState();
 
 }

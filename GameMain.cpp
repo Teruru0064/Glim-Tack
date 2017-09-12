@@ -26,11 +26,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		case TITLE:
 			Title_set();
 			break;
+		case OPTION:
+			Option_set();
+			break;
 		case CHARASELECT:
 			CharaSelect_set();
 			break;
 		case GAMEMAIN:
 			TestScene_set();
+			
 			break;
 		case SCORE:
 			Score_set();

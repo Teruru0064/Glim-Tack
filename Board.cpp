@@ -72,7 +72,9 @@ void Board_init(void){
 }
 
 void Board_draw(void){
-
+	//if (CheckSoundFile() == 0){
+	//	PlaySoundFile("sound\\Main_BGM.mp3", DX_PLAYTYPE_BACK);
+	//}
 	//êFÇÃï\é¶
 	for (int i = 0; i < MapMaxX; i++){
 		for (int j = 0; j < MapMaxY; j++){
